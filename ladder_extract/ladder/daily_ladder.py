@@ -39,6 +39,10 @@ _FONT_PATHS = {
     False: [os.path.join(_ASSETS, "regular.ttf"),
             os.path.join(_ASSETS, "msyh.ttc"),
             r"C:\Windows\Fonts\msyh.ttc",
+            # Noto Sans CJK SC 单字体文件（Debian/Ubuntu 的 noto-cjk-otf 包）
+            "/usr/share/fonts/opentype/noto-cjk-otf/NotoSansCJKsc-Regular.otf",
+            "/usr/share/fonts/opentype/noto-cjk/NotoSansCJKsc-Regular.otf",
+            "/usr/share/fonts/truetype/noto/NotoSansCJKsc-Regular.otf",
             "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
             "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
             "/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc",
@@ -49,6 +53,10 @@ _FONT_PATHS = {
     True:  [os.path.join(_ASSETS, "bold.ttf"),
             os.path.join(_ASSETS, "msyhbd.ttc"),
             r"C:\Windows\Fonts\msyhbd.ttc",
+            # Noto Sans CJK SC Bold 单字体文件（此前缺失，导致粗体退化为文泉驿正黑）
+            "/usr/share/fonts/opentype/noto-cjk-otf/NotoSansCJKsc-Bold.otf",
+            "/usr/share/fonts/opentype/noto-cjk/NotoSansCJKsc-Bold.otf",
+            "/usr/share/fonts/truetype/noto/NotoSansCJKsc-Bold.otf",
             "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
             "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
             "/usr/share/fonts/noto-cjk/NotoSansCJK-Bold.ttc",
@@ -69,9 +77,11 @@ def _pick_font(bold):
 def _scan_system_font(bold):
     """兜底：扫描系统字体目录找任意可用的 CJK 字体，适配不同发行版的目录/包名差异"""
     import glob
-    keys = (["NotoSansCJK*Bold*", "NotoSansSC*Bold*", "SourceHanSans*Bold*", "wqy-zenhei*"]
+    keys = (["NotoSansCJKsc*Bold*", "NotoSansSC*Bold*", "SourceHanSansSC*Bold*",
+             "NotoSansCJK*Bold*", "SourceHanSans*Bold*", "wqy-zenhei*"]
             if bold else
-            ["NotoSansCJK*Regular*", "NotoSansSC*Regular*", "SourceHanSans*Regular*",
+            ["NotoSansCJKsc*Regular*", "NotoSansSC*Regular*", "SourceHanSansSC*Regular*",
+             "NotoSansCJK*Regular*", "SourceHanSans*Regular*",
              "wqy-zenhei*", "DroidSansFallback*", "NotoSansCJK*"])
     for k in keys:
         for ext in ("ttc", "ttf", "otf"):

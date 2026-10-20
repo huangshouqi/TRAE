@@ -848,7 +848,7 @@
    "stat_a": 1,
    "stat_b": 1,
    "open_limit": false,
-   "theme": "算力"
+   "theme": "建材"
   },
   {
    "code": "600148",
@@ -864,7 +864,7 @@
    "stat_a": 3,
    "stat_b": 3,
    "open_limit": false,
-   "theme": "军工"
+   "theme": "汽车"
   }
  ],
  "failed": {
@@ -888,7 +888,7 @@
     "name": "甘化科工",
     "industry": "地面兵装",
     "pct": -4.97,
-    "theme": "半导体"
+    "theme": "军工"
    },
    {
     "code": "603348",
