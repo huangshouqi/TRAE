@@ -1,0 +1,5 @@
+akshare>=1.19.1
+pandas>=2.0
+pillow>=10.0
+requests>=2.31
+lxml>=5.0
