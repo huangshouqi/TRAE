@@ -1,0 +1,416 @@
+{
+ "date": "2026-10-16",
+ "m": 10,
+ "d": 16,
+ "market": null,
+ "rows": [
+  {
+   "label": "章盟主",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "宗申动力",
+     "three": false,
+     "net": 40830040.0
+    },
+    {
+     "name": "佳力奇",
+     "three": false,
+     "net": 23554362.0
+    },
+    {
+     "name": "冰山冷热",
+     "three": true,
+     "net": 17062115.0
+    },
+    {
+     "name": "荣丰控股",
+     "three": false,
+     "net": 8841409.0
+    },
+    {
+     "name": "莱美药业",
+     "three": false,
+     "net": -97596467.0
+    },
+    {
+     "name": "欢瑞世纪",
+     "three": false,
+     "net": -35469516.0
+    },
+    {
+     "name": "天津普林",
+     "three": false,
+     "net": -23574556.0
+    },
+    {
+     "name": "崧盛股份",
+     "three": false,
+     "net": -15930892.0
+    },
+    {
+     "name": "向日葵",
+     "three": true,
+     "net": -2580139.0
+    }
+   ]
+  },
+  {
+   "label": "作手新一",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "天顺风能",
+     "three": false,
+     "net": 42605285.0
+    },
+    {
+     "name": "崇达技术",
+     "three": false,
+     "net": -218912129.28
+    }
+   ]
+  },
+  {
+   "label": "炒股养家",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "吉大正元",
+     "three": true,
+     "net": -21915177.74
+    }
+   ]
+  },
+  {
+   "label": "北京中关村",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "皇台酒业",
+     "three": false,
+     "net": -15315491.28
+    }
+   ]
+  },
+  {
+   "label": "蛇口帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "崧盛股份",
+     "three": false,
+     "net": 7592884.48
+    }
+   ]
+  },
+  {
+   "label": "紫阳东路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "晟楠科技",
+     "three": false,
+     "net": -2154732.09
+    }
+   ]
+  },
+  {
+   "label": "国新北京分",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "佳力奇",
+     "three": false,
+     "net": 8679000.0
+    },
+    {
+     "name": "百花医药",
+     "three": false,
+     "net": -69332930.0
+    }
+   ]
+  },
+  {
+   "label": "上海新闸路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "均胜电子",
+     "three": false,
+     "net": 50881593.0
+    },
+    {
+     "name": "华力创通",
+     "three": false,
+     "net": 37040084.0
+    },
+    {
+     "name": "欢瑞世纪",
+     "three": false,
+     "net": -28236542.99
+    }
+   ]
+  },
+  {
+   "label": "粉葛",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "中鼎股份",
+     "three": false,
+     "net": 19598320.0
+    }
+   ]
+  },
+  {
+   "label": "山东帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "天目药业",
+     "three": false,
+     "net": 9535401.0
+    }
+   ]
+  },
+  {
+   "label": "华泰总部",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "电魂网络",
+     "three": false,
+     "net": 7517549.0
+    },
+    {
+     "name": "莎普爱思",
+     "three": false,
+     "net": 6479825.0
+    },
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": -16336133.86
+    }
+   ]
+  },
+  {
+   "label": "宁波桑田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "莱美药业",
+     "three": false,
+     "net": 128575011.68
+    }
+   ]
+  },
+  {
+   "label": "益田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "荣丰控股",
+     "three": false,
+     "net": 16539675.0
+    }
+   ]
+  },
+  {
+   "label": "南京帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": 9261551.96
+    },
+    {
+     "name": "果麦文化",
+     "three": false,
+     "net": -19882034.77
+    },
+    {
+     "name": "百洋股份",
+     "three": false,
+     "net": -14062142.0
+    },
+    {
+     "name": "天目药业",
+     "three": false,
+     "net": -9631527.0
+    }
+   ]
+  },
+  {
+   "label": "温州帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "百瑞吉",
+     "three": false,
+     "net": -1951072.85
+    }
+   ]
+  },
+  {
+   "label": "深圳帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "荣丰控股",
+     "three": false,
+     "net": 6756084.0
+    },
+    {
+     "name": "*ST威领",
+     "three": false,
+     "net": -21344171.0
+    },
+    {
+     "name": "宇特光电",
+     "three": false,
+     "net": -7669018.84
+    },
+    {
+     "name": "百瑞吉",
+     "three": false,
+     "net": -2290952.97
+    }
+   ]
+  },
+  {
+   "label": "量化打板",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "金健米业",
+     "three": false,
+     "net": 107512401.7
+    },
+    {
+     "name": "百花医药",
+     "three": false,
+     "net": 28579677.89
+    },
+    {
+     "name": "骏亚科技",
+     "three": false,
+     "net": 20925019.0
+    },
+    {
+     "name": "瑞芯微",
+     "three": false,
+     "net": -76438370.0
+    },
+    {
+     "name": "崇达技术",
+     "three": false,
+     "net": -20587573.0
+    }
+   ]
+  },
+  {
+   "label": "拉萨天团",
+   "kind": "names",
+   "items": [
+    {
+     "name": "时代万恒",
+     "three": false,
+     "net": 12003138.0
+    },
+    {
+     "name": "莎普爱思",
+     "three": false,
+     "net": 10005143.0
+    },
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": 8954227.32
+    },
+    {
+     "name": "冰山冷热",
+     "three": true,
+     "net": 8567433.0
+    },
+    {
+     "name": "天津普林",
+     "three": false,
+     "net": 8362186.0
+    },
+    {
+     "name": "百洋股份",
+     "three": false,
+     "net": 6405204.0
+    },
+    {
+     "name": "万邦医药",
+     "three": false,
+     "net": 5534023.48
+    },
+    {
+     "name": "阳光乳业",
+     "three": false,
+     "net": 5294088.0
+    },
+    {
+     "name": "宇特光电",
+     "three": false,
+     "net": 3871214.91
+    },
+    {
+     "name": "果麦文化",
+     "three": false,
+     "net": 2888821.79
+    },
+    {
+     "name": "农心科技",
+     "three": true,
+     "net": 2413490.0
+    },
+    {
+     "name": "东百集团",
+     "three": false,
+     "net": 1366735.950000003
+    },
+    {
+     "name": "天顺风能",
+     "three": false,
+     "net": -9740535.98
+    },
+    {
+     "name": "宗申动力",
+     "three": false,
+     "net": -8100959.0
+    },
+    {
+     "name": "天马科技",
+     "three": false,
+     "net": -6510731.0
+    },
+    {
+     "name": "福建水泥",
+     "three": false,
+     "net": -5193637.0
+    },
+    {
+     "name": "万里股份",
+     "three": false,
+     "net": -5110015.0
+    },
+    {
+     "name": "*ST威领",
+     "three": false,
+     "net": -3667506.3
+    },
+    {
+     "name": "尚水智能",
+     "three": false,
+     "net": -2127324.0
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,509 @@
+{
+ "date": "2026-10-19",
+ "m": 10,
+ "d": 19,
+ "market": null,
+ "rows": [
+  {
+   "label": "章盟主",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "天津普林",
+     "three": false,
+     "net": 25238781.0
+    },
+    {
+     "name": "宁波东力",
+     "three": false,
+     "net": 14928361.81
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": 13628292.0
+    },
+    {
+     "name": "东方嘉盛",
+     "three": false,
+     "net": 11435435.84
+    },
+    {
+     "name": "冰山冷热",
+     "three": false,
+     "net": -17463628.08
+    },
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": -11929802.0
+    }
+   ]
+  },
+  {
+   "label": "作手新一",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "海正药业",
+     "three": false,
+     "net": 21927492.0
+    },
+    {
+     "name": "泓博医药",
+     "three": false,
+     "net": 5660832.2
+    }
+   ]
+  },
+  {
+   "label": "北京中关村",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": 18212080.0
+    },
+    {
+     "name": "大业股份",
+     "three": true,
+     "net": 17932680.0
+    },
+    {
+     "name": "凡拓数创",
+     "three": false,
+     "net": 17931802.0
+    },
+    {
+     "name": "东方嘉盛",
+     "three": false,
+     "net": 17689952.0
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": 17489940.0
+    }
+   ]
+  },
+  {
+   "label": "厦门帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "天创股份",
+     "three": false,
+     "net": -5273593.0
+    }
+   ]
+  },
+  {
+   "label": "紫阳东路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": 23458034.37
+    },
+    {
+     "name": "晟楠科技",
+     "three": false,
+     "net": 3230753.73
+    }
+   ]
+  },
+  {
+   "label": "国新北京分",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "四会富仕",
+     "three": false,
+     "net": 84073902.0
+    },
+    {
+     "name": "凡拓数创",
+     "three": false,
+     "net": 48067256.0
+    },
+    {
+     "name": "闽东电力",
+     "three": false,
+     "net": -52060017.0
+    }
+   ]
+  },
+  {
+   "label": "上海新闸路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "宇树科技",
+     "three": false,
+     "net": 89869652.07
+    },
+    {
+     "name": "保隆科技",
+     "three": true,
+     "net": 38892731.36
+    }
+   ]
+  },
+  {
+   "label": "粉葛",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": 19598722.0
+    },
+    {
+     "name": "新华传媒",
+     "three": false,
+     "net": -38220915.0
+    }
+   ]
+  },
+  {
+   "label": "山东帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "甘化科工",
+     "three": true,
+     "net": -12563003.0
+    },
+    {
+     "name": "*ST亿晶",
+     "three": false,
+     "net": -8888854.0
+    }
+   ]
+  },
+  {
+   "label": "华泰总部",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "晶科科技",
+     "three": false,
+     "net": 17513881.3
+    }
+   ]
+  },
+  {
+   "label": "联储宁波分",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "*ST威领",
+     "three": false,
+     "net": 8022630.0
+    }
+   ]
+  },
+  {
+   "label": "宁波桑田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "天洋新材",
+     "three": false,
+     "net": -5506954.0
+    }
+   ]
+  },
+  {
+   "label": "宁波解放南",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "保隆科技",
+     "three": true,
+     "net": 29659542.0
+    }
+   ]
+  },
+  {
+   "label": "益田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "天津普林",
+     "three": false,
+     "net": -13692912.0
+    }
+   ]
+  },
+  {
+   "label": "彩田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "万丰奥威",
+     "three": true,
+     "net": 89975753.6
+    }
+   ]
+  },
+  {
+   "label": "佛山系",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "莫森泰克",
+     "three": false,
+     "net": -1573648.48
+    }
+   ]
+  },
+  {
+   "label": "南京帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "晶科科技",
+     "three": false,
+     "net": 21016051.0
+    },
+    {
+     "name": "果麦文化",
+     "three": false,
+     "net": 13769535.31
+    },
+    {
+     "name": "南方乳业",
+     "three": false,
+     "net": 4147994.26
+    },
+    {
+     "name": "*ST亿晶",
+     "three": false,
+     "net": 1588334.0
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": -4839536.2
+    }
+   ]
+  },
+  {
+   "label": "温州帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "隆新转债",
+     "three": false,
+     "net": 2870400.0
+    },
+    {
+     "name": "晶科科技",
+     "three": false,
+     "net": -16742463.0
+    }
+   ]
+  },
+  {
+   "label": "深圳帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "宇树科技",
+     "three": false,
+     "net": 76430732.35
+    },
+    {
+     "name": "阳光乳业",
+     "three": false,
+     "net": 2724967.0
+    },
+    {
+     "name": "四会富仕",
+     "three": false,
+     "net": -73541113.0
+    },
+    {
+     "name": "天津普林",
+     "three": false,
+     "net": -16143283.44
+    },
+    {
+     "name": "宇特光电",
+     "three": false,
+     "net": -6785696.59
+    }
+   ]
+  },
+  {
+   "label": "量化打板",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "宇树科技",
+     "three": false,
+     "net": 114019800.83
+    },
+    {
+     "name": "天创股份",
+     "three": false,
+     "net": 8872711.0
+    },
+    {
+     "name": "超声电子",
+     "three": false,
+     "net": 4102436.46
+    },
+    {
+     "name": "金健米业",
+     "three": false,
+     "net": -96554481.22
+    },
+    {
+     "name": "索辰科技",
+     "three": false,
+     "net": -59545219.65
+    },
+    {
+     "name": "百花医药",
+     "three": false,
+     "net": -28002692.0
+    },
+    {
+     "name": "风语筑",
+     "three": false,
+     "net": -25959239.85
+    },
+    {
+     "name": "大普微",
+     "three": false,
+     "net": -20301876.39
+    },
+    {
+     "name": "凡拓数创",
+     "three": false,
+     "net": -13272110.0
+    },
+    {
+     "name": "亚邦股份",
+     "three": false,
+     "net": -7536865.0
+    },
+    {
+     "name": "奥康国际",
+     "three": false,
+     "net": -4668477.0
+    }
+   ]
+  },
+  {
+   "label": "拉萨天团",
+   "kind": "names",
+   "items": [
+    {
+     "name": "新华传媒",
+     "three": false,
+     "net": 161025421.14
+    },
+    {
+     "name": "时代万恒",
+     "three": false,
+     "net": 14734990.0
+    },
+    {
+     "name": "大连圣亚",
+     "three": false,
+     "net": 13053143.0
+    },
+    {
+     "name": "万里股份",
+     "three": true,
+     "net": 11648429.0
+    },
+    {
+     "name": "长春一东",
+     "three": true,
+     "net": 9688543.76
+    },
+    {
+     "name": "读者传媒",
+     "three": false,
+     "net": 9473609.0
+    },
+    {
+     "name": "泓博医药",
+     "three": false,
+     "net": 8453992.7
+    },
+    {
+     "name": "皇台酒业",
+     "three": false,
+     "net": 8167165.0
+    },
+    {
+     "name": "捷众科技",
+     "three": false,
+     "net": 4645693.1899999995
+    },
+    {
+     "name": "东百集团",
+     "three": true,
+     "net": 3964608.9299999997
+    },
+    {
+     "name": "*ST亿晶",
+     "three": false,
+     "net": 1926996.0
+    },
+    {
+     "name": "龙版传媒",
+     "three": true,
+     "net": -22569876.0
+    },
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": -9936928.0
+    },
+    {
+     "name": "*ST威领",
+     "three": false,
+     "net": -5527106.9399999995
+    },
+    {
+     "name": "九阳股份",
+     "three": false,
+     "net": -3933934.4699999997
+    },
+    {
+     "name": "宁波东力",
+     "three": false,
+     "net": -3851950.0
+    },
+    {
+     "name": "南方乳业",
+     "three": false,
+     "net": -2997695.04
+    },
+    {
+     "name": "阳光乳业",
+     "three": false,
+     "net": -2709335.7199999997
+    },
+    {
+     "name": "海正药业",
+     "three": false,
+     "net": -2658024.0
+    },
+    {
+     "name": "尚水智能",
+     "three": false,
+     "net": -1758973.8
+    }
+   ]
+  }
+ ]
+}

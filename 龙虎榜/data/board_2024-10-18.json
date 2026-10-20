@@ -1,0 +1,614 @@
+{
+ "date": "2024-10-18",
+ "m": 10,
+ "d": 18,
+ "market": null,
+ "rows": [
+  {
+   "label": "炒股养家",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "龙图光罩",
+     "three": false,
+     "net": 18355300.0
+    },
+    {
+     "name": "生益电子",
+     "three": false,
+     "net": 15455200.0
+    },
+    {
+     "name": "锴威特",
+     "three": false,
+     "net": 9995800.0
+    },
+    {
+     "name": "综艺股份",
+     "three": false,
+     "net": 9568000.0
+    },
+    {
+     "name": "新力金融",
+     "three": false,
+     "net": -9071845.0
+    }
+   ]
+  },
+  {
+   "label": "上海超短帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "海通证券",
+     "three": true,
+     "net": -391114506.95
+    }
+   ]
+  },
+  {
+   "label": "北京中关村",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "重庆建工",
+     "three": false,
+     "net": 42257697.08
+    },
+    {
+     "name": "杰华特",
+     "three": false,
+     "net": 21550000.0
+    },
+    {
+     "name": "万林物流",
+     "three": true,
+     "net": 10077984.4
+    },
+    {
+     "name": "新华传媒",
+     "three": false,
+     "net": 8112976.0
+    },
+    {
+     "name": "福日电子",
+     "three": false,
+     "net": -38122221.0
+    },
+    {
+     "name": "捷捷微电",
+     "three": false,
+     "net": -36937179.0
+    },
+    {
+     "name": "波长光电",
+     "three": false,
+     "net": -15601227.0
+    },
+    {
+     "name": "凯旺科技",
+     "three": true,
+     "net": -7749101.0
+    }
+   ]
+  },
+  {
+   "label": "华泰总部",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "抚顺特钢",
+     "three": true,
+     "net": 59048611.0
+    },
+    {
+     "name": "新华传媒",
+     "three": false,
+     "net": 23266726.0
+    },
+    {
+     "name": "综艺股份",
+     "three": false,
+     "net": 6933790.0
+    },
+    {
+     "name": "天风证券",
+     "three": false,
+     "net": -88197977.0
+    },
+    {
+     "name": "茶花股份",
+     "three": false,
+     "net": -6395212.0
+    }
+   ]
+  },
+  {
+   "label": "北京光华路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "中粮资本",
+     "three": false,
+     "net": -63612154.0
+    }
+   ]
+  },
+  {
+   "label": "宁波桑田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "天风证券",
+     "three": false,
+     "net": 126587236.0
+    },
+    {
+     "name": "海能达",
+     "three": true,
+     "net": 37713377.0
+    },
+    {
+     "name": "新力金融",
+     "three": false,
+     "net": 18071907.0
+    },
+    {
+     "name": "大众交通",
+     "three": false,
+     "net": -50616829.94
+    },
+    {
+     "name": "恒银科技",
+     "three": false,
+     "net": -10574728.0
+    }
+   ]
+  },
+  {
+   "label": "炒新一族",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "四川双马",
+     "three": false,
+     "net": 3239151.0
+    }
+   ]
+  },
+  {
+   "label": "益田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "寒武纪",
+     "three": false,
+     "net": 157717300.0
+    },
+    {
+     "name": "罗博特科",
+     "three": false,
+     "net": 64218929.0
+    },
+    {
+     "name": "威尔高",
+     "three": false,
+     "net": -20569860.0
+    }
+   ]
+  },
+  {
+   "label": "成都系",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "新金路",
+     "three": false,
+     "net": 5881263.63
+    },
+    {
+     "name": "任子行",
+     "three": true,
+     "net": -2986799.21
+    }
+   ]
+  },
+  {
+   "label": "溧阳路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "凯华材料",
+     "three": false,
+     "net": 7119555.74
+    },
+    {
+     "name": "华信永道",
+     "three": false,
+     "net": -9673519.36
+    }
+   ]
+  },
+  {
+   "label": "佛山系",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "新力金融",
+     "three": false,
+     "net": 18437474.0
+    }
+   ]
+  },
+  {
+   "label": "南京帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "珂玛科技",
+     "three": false,
+     "net": 16870645.64
+    },
+    {
+     "name": "光大嘉宝",
+     "three": false,
+     "net": 15378577.04
+    },
+    {
+     "name": "龙图光罩",
+     "three": false,
+     "net": 12710200.0
+    },
+    {
+     "name": "佳先股份",
+     "three": false,
+     "net": 6480936.27
+    },
+    {
+     "name": "雅葆轩",
+     "three": false,
+     "net": 6439922.07
+    },
+    {
+     "name": "莱斯信息",
+     "three": false,
+     "net": -16448500.0
+    },
+    {
+     "name": "国华退",
+     "three": false,
+     "net": -14009123.8
+    },
+    {
+     "name": "汉鑫科技",
+     "three": false,
+     "net": -11537318.19
+    },
+    {
+     "name": "铜冠矿建",
+     "three": false,
+     "net": -10672702.11
+    },
+    {
+     "name": "万林物流",
+     "three": true,
+     "net": -8856743.0
+    },
+    {
+     "name": "众诚科技",
+     "three": false,
+     "net": -5573930.88
+    }
+   ]
+  },
+  {
+   "label": "温州帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "万林物流",
+     "three": true,
+     "net": 12325076.0
+    },
+    {
+     "name": "汉鑫科技",
+     "three": false,
+     "net": 6329846.27
+    },
+    {
+     "name": "北方长龙",
+     "three": false,
+     "net": 5316500.5
+    },
+    {
+     "name": "凯德石英",
+     "three": false,
+     "net": 4234505.8
+    }
+   ]
+  },
+  {
+   "label": "深圳帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "罗博特科",
+     "three": false,
+     "net": 94242254.8
+    },
+    {
+     "name": "生益电子",
+     "three": false,
+     "net": 20177400.0
+    },
+    {
+     "name": "茶花股份",
+     "three": false,
+     "net": 3347335.0
+    },
+    {
+     "name": "东易日盛",
+     "three": false,
+     "net": 2787881.0
+    }
+   ]
+  },
+  {
+   "label": "量化打板",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "生益电子",
+     "three": false,
+     "net": 18565900.0
+    },
+    {
+     "name": "寒武纪",
+     "three": false,
+     "net": -92598900.0
+    },
+    {
+     "name": "抚顺特钢",
+     "three": true,
+     "net": -34852732.0
+    },
+    {
+     "name": "台基股份",
+     "three": false,
+     "net": -25006069.0
+    },
+    {
+     "name": "罗博特科",
+     "three": false,
+     "net": -18802481.4
+    },
+    {
+     "name": "龙图光罩",
+     "three": false,
+     "net": -13698300.0
+    },
+    {
+     "name": "锴威特",
+     "three": false,
+     "net": -8752500.0
+    },
+    {
+     "name": "新华传媒",
+     "three": false,
+     "net": -2918495.0
+    },
+    {
+     "name": "安奈儿",
+     "three": false,
+     "net": -2748153.55
+    }
+   ]
+  },
+  {
+   "label": "拉萨天团",
+   "kind": "names",
+   "items": [
+    {
+     "name": "大众交通",
+     "three": false,
+     "net": 100637314.44
+    },
+    {
+     "name": "ST金顶",
+     "three": false,
+     "net": 49941686.09
+    },
+    {
+     "name": "福日电子",
+     "three": false,
+     "net": 44911681.0
+    },
+    {
+     "name": "海能达",
+     "three": true,
+     "net": 35179508.42
+    },
+    {
+     "name": "中粮资本",
+     "three": false,
+     "net": 31292880.92
+    },
+    {
+     "name": "国民技术",
+     "three": false,
+     "net": 29157889.72
+    },
+    {
+     "name": "常山北明",
+     "three": false,
+     "net": 27061334.27
+    },
+    {
+     "name": "捷捷微电",
+     "three": false,
+     "net": 16982893.4
+    },
+    {
+     "name": "国华退",
+     "three": false,
+     "net": 14700008.21
+    },
+    {
+     "name": "广道退",
+     "three": false,
+     "net": 14187121.2
+    },
+    {
+     "name": "青岛金王",
+     "three": false,
+     "net": 9810712.81
+    },
+    {
+     "name": "艾融软件",
+     "three": false,
+     "net": 9494726.510000002
+    },
+    {
+     "name": "重庆建工",
+     "three": false,
+     "net": 9485039.0
+    },
+    {
+     "name": "任子行",
+     "three": true,
+     "net": 8757958.7
+    },
+    {
+     "name": "龙图光罩",
+     "three": false,
+     "net": 7034600.0
+    },
+    {
+     "name": "常山药业",
+     "three": true,
+     "net": 5891635.319999999
+    },
+    {
+     "name": "川大智胜",
+     "three": false,
+     "net": 5721216.0
+    },
+    {
+     "name": "综艺股份",
+     "three": false,
+     "net": 4465846.0
+    },
+    {
+     "name": "汉鑫科技",
+     "three": false,
+     "net": 4072506.0000000005
+    },
+    {
+     "name": "凯德石英",
+     "three": false,
+     "net": 3942157.57
+    },
+    {
+     "name": "华信永道",
+     "three": false,
+     "net": 3271466.85
+    },
+    {
+     "name": "东易日盛",
+     "three": false,
+     "net": 2299051.2
+    },
+    {
+     "name": "优机股份",
+     "three": false,
+     "net": 2000050.2000000002
+    },
+    {
+     "name": "中寰股份",
+     "three": false,
+     "net": 1524588.2400000002
+    },
+    {
+     "name": "天风证券",
+     "three": false,
+     "net": -180944424.0
+    },
+    {
+     "name": "四川路桥",
+     "three": false,
+     "net": -29352192.49
+    },
+    {
+     "name": "指南针",
+     "three": false,
+     "net": -23522785.7
+    },
+    {
+     "name": "银之杰",
+     "three": false,
+     "net": -14710450.739999998
+    },
+    {
+     "name": "海立股份",
+     "three": false,
+     "net": -13041988.0
+    },
+    {
+     "name": "凯华材料",
+     "three": false,
+     "net": -8436676.66
+    },
+    {
+     "name": "佳先股份",
+     "three": false,
+     "net": -7712062.95
+    },
+    {
+     "name": "铜冠矿建",
+     "three": false,
+     "net": -5393887.85
+    },
+    {
+     "name": "威贸电子",
+     "three": false,
+     "net": -5110935.77
+    },
+    {
+     "name": "恒银科技",
+     "three": false,
+     "net": -5032924.780000001
+    },
+    {
+     "name": "四川双马",
+     "three": false,
+     "net": -4234478.550000001
+    },
+    {
+     "name": "波长光电",
+     "three": false,
+     "net": -3609617.1800000006
+    },
+    {
+     "name": "大宏立",
+     "three": false,
+     "net": -3508958.28
+    },
+    {
+     "name": "北方长龙",
+     "three": false,
+     "net": -2593452.0
+    },
+    {
+     "name": "凯旺科技",
+     "three": true,
+     "net": -2124500.0
+    },
+    {
+     "name": "雅葆轩",
+     "three": false,
+     "net": -1364956.21
+    }
+   ]
+  }
+ ]
+}

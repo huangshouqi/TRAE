@@ -1,0 +1,93 @@
+# -*- coding: utf-8 -*-
+"""一键入口：抓取龙虎榜 -> 聚合 -> 输出 PNG + HTML。
+
+用法：
+    python src/lhb_main.py                # 自动取最近一个交易日
+    python src/lhb_main.py 2026-10-16     # 指定日期
+"""
+import argparse
+import json
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import lhb_build
+import lhb_fetch
+import lhb_render
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CONFIG_DIR = os.path.join(ROOT, "config")
+DATA_DIR = os.path.join(ROOT, "data")
+OUT_DIR = os.path.join(ROOT, "output")
+
+
+def _dump(path, obj):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=1)
+
+
+def main():
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+    ap = argparse.ArgumentParser()
+    ap.add_argument("date", nargs="?", help="交易日 YYYY-MM-DD，缺省自动取最新")
+    ap.add_argument("--open", dest="open_after", action="store_true", help="生成后打开图片")
+    args = ap.parse_args()
+
+    style = lhb_build.load_json(os.path.join(CONFIG_DIR, "样式.json"))
+    mapping = lhb_build.load_json(os.path.join(CONFIG_DIR, "席位映射.json"))
+
+    latest = lhb_fetch.resolve_trade_date()
+    date = args.date or latest
+    is_latest = (date == latest)
+    print("交易日：%s%s" % (date, "" if is_latest else "（历史）"))
+
+    raw = lhb_fetch.fetch_day(date)
+    print("抓取：个股 %d / 买席 %d / 卖席 %d / 机构 %d" % (
+        len(raw["stocks"]), len(raw["buys"]), len(raw["sells"]), len(raw["org"])))
+    _dump(os.path.join(DATA_DIR, "raw_%s.json" % date), raw)
+
+    board = lhb_build.build(raw, mapping, style)
+    _dump(os.path.join(DATA_DIR, "board_%s.json" % date), board)
+    print("聚合：%d 行" % len(board["rows"]))
+    for row in board["rows"]:
+        print("   %-8s %d 只" % (row["label"], len(row["items"])))
+
+    os.makedirs(OUT_DIR, exist_ok=True)
+    styles = [("", style)]
+    blue_cfg = os.path.join(CONFIG_DIR, "样式_蓝框.json")
+    if os.path.exists(blue_cfg):
+        styles.append(("_蓝框", lhb_build.load_json(blue_cfg)))
+
+    formats = [
+        ("", None),               # 原比例（长图）
+        ("_3x4", (1080, 1440)),   # 小红书 3:4
+        ("_9x16", (1080, 1920)),  # 抖音 9:16
+    ]
+
+    first_png = None
+    for s_tag, base in styles:
+        for f_tag, ratio in formats:
+            st = dict(base)
+            if ratio:
+                st["fit"] = {"enabled": True, "w": ratio[0], "h": ratio[1],
+                             "pad": 0, "max_scale": 1, "bg": "#FFFFFF"}
+            tag = s_tag + f_tag
+            png = os.path.join(OUT_DIR, "龙虎榜_%s%s.png" % (date, tag))
+            htm = os.path.join(OUT_DIR, "龙虎榜_%s%s.html" % (date, tag))
+            _, w, h = lhb_render.render_png(board, st, png)
+            lhb_render.render_html(board, st, htm)
+            first_png = first_png or png
+            print("输出：%s (%dx%d)" % (png, w, h))
+            print("      %s" % htm)
+
+    if args.open_after and first_png:
+        os.startfile(first_png)
+
+
+if __name__ == "__main__":
+    main()

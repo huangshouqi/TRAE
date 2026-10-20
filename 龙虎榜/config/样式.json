@@ -1,0 +1,84 @@
+{
+  "canvas_width": 1080,
+  "pad_x": 34,
+  "font_bold": [
+    "C:\\Windows\\Fonts\\msyhbd.ttc",
+    "C:\\Windows\\Fonts\\msyh.ttc",
+    "C:\\Windows\\Fonts\\simhei.ttf"
+  ],
+  "title": {
+    "template": "{m}月{d}日游资龙虎榜",
+    "font_size": 56,
+    "color": "#141414",
+    "center_y": 66,
+    "height": 140,
+    "accent": { "enabled": false, "color": "#141414", "width": 72, "height": 6, "center_y": 120 }
+  },
+  "market": {
+    "height": 108,
+    "bg": "#F4F5F7",
+    "radius": 16,
+    "margin_bottom": 26,
+    "zone_pad": 28,
+    "divider": "#E2E4E9",
+    "label_size": 21,
+    "label_color": "#8B909A",
+    "big_size": 42,
+    "num_size": 33,
+    "chg_size": 26
+  },
+  "label_col": {
+    "width": 164,
+    "font_size": 28,
+    "color": "#191919"
+  },
+  "content": {
+    "font_size": 27,
+    "right_pad": 4,
+    "base_height": 64,
+    "first_line_center": 32,
+    "line_pitch": 42,
+    "item_gap": 26,
+    "name_gap": 11
+  },
+  "chip": {
+    "font_size": 18,
+    "height": 27,
+    "pad_x": 8,
+    "radius": 5,
+    "color": "#FFFFFF"
+  },
+  "three_font_size": 19,
+  "three_color": "#9A9FA8",
+  "row": {
+    "line_color": "#F0F1F3",
+    "line_width": 0,
+    "group_line_color": "#D9DCE1",
+    "group_line_width": 2,
+    "group_pad": 13
+  },
+  "color_up": "#D63333",
+  "color_down": "#159A55",
+  "footer": {
+    "height": 76,
+    "line_color": "#ECEDEF",
+    "text": "红色为净买，绿色为净卖；数据由公开信息整理，仅供参考，不构成投资建议。",
+    "font_size": 20,
+    "color": "#9A9FA8"
+  },
+  "show_market": false,
+  "watermark": {
+    "enabled": true,
+    "text": "©路扬LuYang",
+    "font_size": 66,
+    "opacity": 0.05,
+    "angle": -30,
+    "color": "#000000"
+  },
+  "only_named_seats": true,
+  "exclude_labels": ["机构"],
+  "max_seat_rows": 26,
+  "min_net_amount": 1000000,
+  "group_order": ["量化打板", "机构", "拉萨天团"],
+  "max_lines": { "_default": 3, "量化打板": 5, "机构": 8, "拉萨天团": 3 }
+}
