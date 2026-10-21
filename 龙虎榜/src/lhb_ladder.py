@@ -122,16 +122,44 @@ def _draw_row(d, yy, row, lines, style, c_up, c_down):
     return h
 
 
+def _draw_legend(d, style):
+    """右上角「净买 / 净卖」图例。"""
+    f = _font(style["font_bold"], 15 * K)
+    pad, gap, lh = 12 * K, 10 * K, 28 * K
+    ly = 32 * K
+    w1 = int(d.textlength("净买", font=f)) + pad * 2
+    w2 = int(d.textlength("净卖", font=f)) + pad * 2
+    x2 = W - M - w2
+    x1 = x2 - gap - w1
+    for x, text, color, w in ((x1, "净买", C_RED, w1), (x2, "净卖", C_GREEN, w2)):
+        d.rounded_rectangle([x, ly, x + w, ly + lh], radius=5 * K, fill=_hex(color))
+        d.text((x + w / 2, ly + lh / 2), text, font=f, fill=(255, 255, 255), anchor="mm")
+
+
 def _draw_header(d, board, style):
     top = 22 * K
     f_title = _font(style["font_bold"], 43 * K)
-    d.rounded_rectangle([M, top + 2 * K, M + 6 * K, top + 46 * K],
-                        radius=3 * K, fill=_hex(C_RED))
-    x = M + 18 * K
     date_txt = "%d月%d日" % (board["m"], board["d"])
+    red_txt = "游资龙虎榜"
+    bar_w, gap1, gap2 = 6 * K, 12 * K, 10 * K
+    w_date = d.textlength(date_txt, font=f_title)
+    w_red = d.textlength(red_txt, font=f_title)
+
+    if style.get("center_title"):
+        total = bar_w + gap1 + w_date + gap2 + w_red
+        x = (W - total) / 2
+    else:
+        x = M
+
+    d.rounded_rectangle([x, top + 2 * K, x + bar_w, top + 46 * K],
+                        radius=3 * K, fill=_hex(C_RED))
+    x += bar_w + gap1
     d.text((x, top + 24 * K), date_txt, font=f_title, fill=_hex(C_INK), anchor="lm")
-    x += d.textlength(date_txt, font=f_title) + 10 * K
-    d.text((x, top + 24 * K), "游资龙虎榜", font=f_title, fill=_hex(C_RED), anchor="lm")
+    x += w_date + gap2
+    d.text((x, top + 24 * K), red_txt, font=f_title, fill=_hex(C_RED), anchor="lm")
+
+    if style.get("show_legend"):
+        _draw_legend(d, style)
 
     # 红色分隔线
     d.rectangle([M, 78 * K, W, 83 * K], fill=_hex(C_RED))

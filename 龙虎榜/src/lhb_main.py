@@ -54,6 +54,12 @@ def main():
     ladder["show_market"] = False
     styles.append(("_天梯", ladder))
 
+    # 最终版：天梯版式 + 右上角图例 + 居中主标题（3:4 高清）
+    final = dict(ladder)
+    final["center_title"] = True
+    final["show_legend"] = True
+    styles.append(("_最终版", final))
+
     latest = lhb_fetch.resolve_trade_date()
     date = args.date or latest
     is_latest = (date == latest)
