@@ -130,7 +130,14 @@ def _fit_content_style(board, style, draw, avail):
 
     def fits(st):
         gap = st["content"]["item_gap"]
+        flow = set(style.get("flow_labels", []))
         for row in board["rows"]:
+            if row["label"] in flow:
+                # 流式行按容器宽度自动换行，只需保证单条不超宽
+                for it in row["items"]:
+                    if _item_w(_seg_list(it, row["kind"]), draw, st) > avail + 0.5:
+                        return False
+                continue
             limit = max_lines.get(row["label"], dflt)
             items = row["items"][:limit * per]
             for i in range(0, len(items), per):
@@ -172,33 +179,49 @@ def _layout(board, style, draw, avail):
     per = max(1, int(c.get("per_line", 4)))
     group_pad = style["row"]["group_pad"]
     groups = set(style.get("group_order", []))
+    flow_labels = set(style.get("flow_labels", []))
     max_lines = style.get("max_lines", {})
     dflt = max_lines.get("_default", 3)
 
     rows = []
     for row in board["rows"]:
-        limit = max_lines.get(row["label"], dflt)
-        items = row["items"][:limit * per]
-        lines = []
-        for i in range(0, len(items), per):
-            chunk = items[i:i + per]
-            segs = [_seg_list(it, row["kind"]) for it in chunk]
-            widths = [_item_w(sg, draw, style) for sg in segs]
-            n = len(chunk)
-            # 满行左右两端对齐，末行按常规间距左排
-            gap = item_gap
-            if n == per and n > 1:
-                gap = max(item_gap, (avail - sum(widths)) / (n - 1))
-            line, x = [], 0.0
-            for j, item in enumerate(chunk):
-                line.append((item, segs[j], x))
-                x += widths[j] + gap
-            lines.append(line)
+        is_flow = row["label"] in flow_labels
+        if is_flow:
+            # 流式行：按顺序横向排布、自动换行，宽度与上方内容区一致
+            lines, line, x = [], [], 0.0
+            for item in row["items"]:
+                segs = _seg_list(item, row["kind"])
+                w = _item_w(segs, draw, style)
+                if line and x + w > avail:
+                    lines.append(line)
+                    line, x = [], 0.0
+                line.append((item, segs, x))
+                x += w + item_gap
+            if line:
+                lines.append(line)
+        else:
+            limit = max_lines.get(row["label"], dflt)
+            items = row["items"][:limit * per]
+            lines = []
+            for i in range(0, len(items), per):
+                chunk = items[i:i + per]
+                segs = [_seg_list(it, row["kind"]) for it in chunk]
+                widths = [_item_w(sg, draw, style) for sg in segs]
+                n = len(chunk)
+                # 满行左右两端对齐，末行按常规间距左排
+                gap = item_gap
+                if n == per and n > 1:
+                    gap = max(item_gap, (avail - sum(widths)) / (n - 1))
+                line, x = [], 0.0
+                for j, item in enumerate(chunk):
+                    line.append((item, segs[j], x))
+                    x += widths[j] + gap
+                lines.append(line)
         is_group = row["label"] in groups
         pad = group_pad if is_group else 0
         rows.append({
             "label": row["label"], "kind": row["kind"], "group": is_group,
-            "lines": lines, "first_center": first + pad,
+            "flow": is_flow, "lines": lines, "first_center": first + pad,
             "height": base_h + (len(lines) - 1) * line_pitch + pad * 2,
         })
     return rows
@@ -523,6 +546,7 @@ def render_html(board, style, out_path):
   .items{flex:1;font-size:%(bf)dpx;font-weight:700;line-height:%(lp)dpx;}
   .ln{display:flex;align-items:center;justify-content:space-between;height:%(lp)dpx;white-space:nowrap;}
   .ln.part{justify-content:flex-start;gap:%(ig)dpx;}
+  .ln.flow{justify-content:flex-start;gap:%(ig)dpx;}
   .it{display:inline-block;white-space:nowrap;}
   .it>*{display:inline-block;vertical-align:middle;}
   .chip{color:#fff;font-size:%(chf)dpx;font-weight:700;border-radius:%(chrad)dpx;
@@ -582,7 +606,7 @@ def render_html(board, style, out_path):
                 inner = "".join(_seg_html(role, text, item["net"], row["kind"])
                                 for role, text in segs)
                 parts.append("<span class=\"it\">%s</span>" % inner)
-            ln_cls = "ln" if len(line) >= per else "ln part"
+            ln_cls = "ln flow" if lrow.get("flow") else ("ln" if len(line) >= per else "ln part")
             lines_html.append("<div class=\"%s\">%s</div>" % (ln_cls, "".join(parts)))
         cls = "row g" if row["label"] in groups else "row"
         body.append("<div class=\"%s\"><div class=\"lab\">%s</div><div class=\"items\">%s</div></div>"

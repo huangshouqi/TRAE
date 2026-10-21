@@ -81,6 +81,7 @@
   "exclude_labels": ["机构"],
   "max_seat_rows": 26,
   "min_net_amount": 1000000,
-  "group_order": ["量化打板", "机构", "拉萨天团"],
-  "max_lines": { "_default": 3, "量化打板": 5, "机构": 8, "拉萨天团": 3 }
+  "group_order": ["机构", "拉萨天团"],
+  "flow_labels": ["拉萨天团"],
+  "max_lines": { "_default": 3, "机构": 8, "拉萨天团": 3 }
 }
