@@ -443,82 +443,6 @@
    ]
   },
   {
-   "label": "开源西安西大街",
-   "kind": "seat",
-   "items": [
-    {
-     "name": "利亚德",
-     "three": false,
-     "net": 86176358.74
-    },
-    {
-     "name": "粤传媒",
-     "three": true,
-     "net": 51890479.68
-    },
-    {
-     "name": "中恒集团",
-     "three": false,
-     "net": 47547881.0
-    },
-    {
-     "name": "上海九百",
-     "three": false,
-     "net": 34304476.83
-    },
-    {
-     "name": "慧辰股份",
-     "three": false,
-     "net": 25733595.48
-    },
-    {
-     "name": "天洋新材",
-     "three": false,
-     "net": 23072793.0
-    },
-    {
-     "name": "敏芯股份",
-     "three": true,
-     "net": 17592120.01
-    },
-    {
-     "name": "均瑶健康",
-     "three": false,
-     "net": 16134158.4
-    },
-    {
-     "name": "日海智能",
-     "three": true,
-     "net": 13103200.0
-    },
-    {
-     "name": "星光股份",
-     "three": true,
-     "net": 10445387.0
-    },
-    {
-     "name": "泰尔股份",
-     "three": true,
-     "net": 6622755.0
-    },
-    {
-     "name": "兆讯传媒",
-     "three": false,
-     "net": 5817025.15
-    },
-    {
-     "name": "海洋王",
-     "three": true,
-     "net": -39448640.0
-    },
-    {
-     "name": "通宇通讯",
-     "three": true,
-     "net": -3409215.879999999
-    }
-   ]
-  },
-  {
    "label": "湖州劳动路",
    "kind": "seat",
    "items": [
@@ -635,6 +559,82 @@
      "name": "三峡新材",
      "three": true,
      "net": 7607520.0
+    }
+   ]
+  },
+  {
+   "label": "开源西安西",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "利亚德",
+     "three": false,
+     "net": 86176358.74
+    },
+    {
+     "name": "粤传媒",
+     "three": true,
+     "net": 51890479.68
+    },
+    {
+     "name": "中恒集团",
+     "three": false,
+     "net": 47547881.0
+    },
+    {
+     "name": "上海九百",
+     "three": false,
+     "net": 34304476.83
+    },
+    {
+     "name": "慧辰股份",
+     "three": false,
+     "net": 25733595.48
+    },
+    {
+     "name": "天洋新材",
+     "three": false,
+     "net": 23072793.0
+    },
+    {
+     "name": "敏芯股份",
+     "three": true,
+     "net": 17592120.01
+    },
+    {
+     "name": "均瑶健康",
+     "three": false,
+     "net": 16134158.4
+    },
+    {
+     "name": "日海智能",
+     "three": true,
+     "net": 13103200.0
+    },
+    {
+     "name": "星光股份",
+     "three": true,
+     "net": 10445387.0
+    },
+    {
+     "name": "泰尔股份",
+     "three": true,
+     "net": 6622755.0
+    },
+    {
+     "name": "兆讯传媒",
+     "three": false,
+     "net": 5817025.15
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": -39448640.0
+    },
+    {
+     "name": "通宇通讯",
+     "three": true,
+     "net": -3409215.879999999
     }
    ]
   },
