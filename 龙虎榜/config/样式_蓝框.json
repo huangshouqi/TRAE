@@ -49,7 +49,9 @@
     "first_line_center": 32,
     "line_pitch": 42,
     "item_gap": 26,
-    "name_gap": 11
+    "name_gap": 11,
+    "per_line": 4,
+    "min_font_size": 15
   },
   "chip": {
     "font_size": 18,

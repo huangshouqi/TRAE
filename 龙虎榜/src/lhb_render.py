@@ -5,6 +5,7 @@
   render_png  -> 高清 PNG（发布用）
   render_html -> HTML（预览 / 微调）
 """
+import copy
 import html as html_mod
 
 from PIL import Image, ImageDraw, ImageFont
@@ -48,6 +49,7 @@ def _market_cells(market):
 
 
 def _font(paths, size):
+    size = max(1, int(round(size)))
     key = (tuple(paths), size)
     if key not in _font_cache:
         font = None
@@ -87,13 +89,71 @@ def _seg_w(role, text, draw, style):
     return w
 
 
+def _gap(role, nxt, style):
+    base = _GAPS.get((role, nxt), _DEFAULT_GAP)
+    return base * style["content"].get("_scale", 1.0)
+
+
 def _item_w(segs, draw, style):
     total = 0.0
     for i, (role, text) in enumerate(segs):
         total += _seg_w(role, text, draw, style)
         if i + 1 < len(segs):
-            total += _GAPS.get((role, segs[i + 1][0]), _DEFAULT_GAP)
+            total += _gap(role, segs[i + 1][0], style)
     return total
+
+
+def _scale_style(style, s):
+    """按比例缩放内容区字号与间距，保证一行能放下固定数量的股票。"""
+    st = copy.deepcopy(style)
+    c = st["content"]
+    for key in ("font_size", "item_gap", "name_gap", "first_line_center",
+                "line_pitch", "base_height"):
+        c[key] = c[key] * s
+    st["chip"]["font_size"] *= s
+    st["chip"]["height"] *= s
+    st["chip"]["pad_x"] *= s
+    st["three_font_size"] *= s
+    st["row"]["group_pad"] *= s
+    c["_scale"] = s
+    return st
+
+
+def _fit_content_style(board, style, draw, avail):
+    """从原始字号开始向下试探，找到能让每行固定 per_line 个股票的最大字号。"""
+    c = style["content"]
+    per = max(1, int(c.get("per_line", 4)))
+    base_font = float(c["font_size"])
+    min_scale = max(0.35, min(1.0, float(c.get("min_font_size", 15)) / base_font))
+    max_lines = style.get("max_lines", {})
+    dflt = max_lines.get("_default", 3)
+
+    def fits(st):
+        gap = st["content"]["item_gap"]
+        for row in board["rows"]:
+            limit = max_lines.get(row["label"], dflt)
+            items = row["items"][:limit * per]
+            for i in range(0, len(items), per):
+                chunk = items[i:i + per]
+                widths = [_item_w(_seg_list(it, row["kind"]), draw, st) for it in chunk]
+                if not widths:
+                    continue
+                total = sum(widths) + gap * (len(widths) - 1)
+                if total > avail + 0.5:
+                    return False
+        return True
+
+    # 二分查找能放下的最大字号，比逐档试探快，也更不容易抖
+    lo, hi = min_scale, 1.0
+    best = _scale_style(style, min_scale)
+    for _ in range(14):
+        mid = (lo + hi) / 2.0
+        st = _scale_style(style, mid)
+        if fits(st):
+            best, lo = st, mid
+        else:
+            hi = mid
+    return best
 
 
 def _fit_label_size(paths, base_size, text, max_w, draw):
@@ -109,6 +169,7 @@ def _layout(board, style, draw, avail):
     c = style["content"]
     line_pitch, first, base_h = c["line_pitch"], c["first_line_center"], c["base_height"]
     item_gap = c["item_gap"]
+    per = max(1, int(c.get("per_line", 4)))
     group_pad = style["row"]["group_pad"]
     groups = set(style.get("group_order", []))
     max_lines = style.get("max_lines", {})
@@ -117,17 +178,22 @@ def _layout(board, style, draw, avail):
     rows = []
     for row in board["rows"]:
         limit = max_lines.get(row["label"], dflt)
-        lines, x = [[]], 0.0
-        for item in row["items"]:
-            segs = _seg_list(item, row["kind"])
-            w = _item_w(segs, draw, style)
-            if lines[-1] and x + w > avail:
-                if len(lines) >= limit:
-                    break
-                lines.append([])
-                x = 0.0
-            lines[-1].append((item, segs, x))
-            x += w + item_gap
+        items = row["items"][:limit * per]
+        lines = []
+        for i in range(0, len(items), per):
+            chunk = items[i:i + per]
+            segs = [_seg_list(it, row["kind"]) for it in chunk]
+            widths = [_item_w(sg, draw, style) for sg in segs]
+            n = len(chunk)
+            # 满行左右两端对齐，末行按常规间距左排
+            gap = item_gap
+            if n == per and n > 1:
+                gap = max(item_gap, (avail - sum(widths)) / (n - 1))
+            line, x = [], 0.0
+            for j, item in enumerate(chunk):
+                line.append((item, segs[j], x))
+                x += widths[j] + gap
+            lines.append(line)
         is_group = row["label"] in groups
         pad = group_pad if is_group else 0
         rows.append({
@@ -158,7 +224,7 @@ def _draw_item(d, x, cy, segs, net, kind, style, c_up, c_down, c_ink):
         else:
             d.text((x, cy), text, font=_role_font("name", style), fill=c_ink, anchor="lm")
         if i + 1 < len(segs):
-            x += w + _GAPS.get((role, segs[i + 1][0]), _DEFAULT_GAP)
+            x += w + _gap(role, segs[i + 1][0], style)
 
 
 def _draw_market(d, W, y0, style, market, c_up, c_down):
@@ -289,19 +355,22 @@ def _fit_canvas(img, style):
 def render_png(board, style, out_path):
     W = style["canvas_width"]
     pad_x = style["pad_x"]
+    label_w = style["label_col"]["width"]
+
+    content_x0 = pad_x + label_w
+    avail = (W - pad_x - style["content"]["right_pad"]) - content_x0
+
+    probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    # 每行固定 per_line 个股票，按内容宽度自适应字号
+    style = _fit_content_style(board, style, probe, avail)
     title, c = style["title"], style["content"]
     row_style, footer = style["row"], style["footer"]
-    label_w = style["label_col"]["width"]
 
     c_up, c_down = _hex(style["color_up"]), _hex(style["color_down"])
     c_ink = _hex(style["label_col"]["color"])
     font_title = _font(style["font_bold"], title["font_size"])
     font_foot = _font(style["font_bold"], footer["font_size"])
 
-    content_x0 = pad_x + label_w
-    avail = (W - pad_x - c["right_pad"]) - content_x0
-
-    probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
     rows = _layout(board, style, probe, avail)
     for r in rows:
         r["lab_size"] = _fit_label_size(style["font_bold"], style["label_col"]["font_size"],
@@ -313,7 +382,7 @@ def render_png(board, style, out_path):
     list_top = title["height"]
     if market_cells:
         list_top += style["market"]["height"] + style["market"]["margin_bottom"]
-    H = list_top + body_h + footer["height"]
+    H = int(round(list_top + body_h + footer["height"]))
 
     img = Image.new("RGB", (W, H), (255, 255, 255))
     d = ImageDraw.Draw(img)
@@ -376,8 +445,13 @@ def _seg_html(role, text, net, kind):
 def render_html(board, style, out_path):
     W = style["canvas_width"]
     pad_x = style["pad_x"]
-    title, c, m, footer = style["title"], style["content"], style["market"], style["footer"]
     label_w = style["label_col"]["width"]
+    probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    avail = (W - pad_x - style["content"]["right_pad"]) - (pad_x + label_w)
+    # 与 PNG 用同一套字号自适应结果，保证预览和成图一致
+    style = _fit_content_style(board, style, probe, avail)
+    title, c, m, footer = style["title"], style["content"], style["market"], style["footer"]
+    per = max(1, int(c.get("per_line", 4)))
     groups = set(style.get("group_order", []))
     use_market = style.get("show_market", True)
     market = (board.get("market") or {}) if use_market else {}
@@ -393,10 +467,7 @@ def render_html(board, style, out_path):
     ac_on = bool(ac.get("enabled"))
 
     # 画布适配：HTML 预览用 transform 等比缩放来模拟 3:4 / 9:16
-    probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
-    _rows = _layout(board, style, probe, (W - pad_x - c["right_pad"]) - (pad_x + label_w))
-    # PNG 会按 max_lines 截断，HTML 同步截断，避免预览比成图多出内容
-    shown = [sum(len(line) for line in r["lines"]) for r in _rows]
+    _rows = _layout(board, style, probe, avail)
     market_cells = _market_cells(market)
     board_h = title["height"] + sum(r["height"] for r in _rows) + footer["height"]
     if market_cells:
@@ -450,7 +521,9 @@ def render_html(board, style, out_path):
   .lab{width:%(lw)dpx;flex:0 0 %(lw)dpx;font-weight:700;font-size:%(lf)dpx;color:%(lc)s;
        line-height:%(lp)dpx;}
   .items{flex:1;font-size:%(bf)dpx;font-weight:700;line-height:%(lp)dpx;}
-  .it{display:inline-block;margin-right:%(ig)dpx;white-space:nowrap;}
+  .ln{display:flex;align-items:center;justify-content:space-between;height:%(lp)dpx;white-space:nowrap;}
+  .ln.part{justify-content:flex-start;gap:%(ig)dpx;}
+  .it{display:inline-block;white-space:nowrap;}
   .it>*{display:inline-block;vertical-align:middle;}
   .chip{color:#fff;font-size:%(chf)dpx;font-weight:700;border-radius:%(chrad)dpx;
         padding:1px %(chpx)dpx;margin-right:%(chg)dpx;line-height:1.4;}
@@ -501,15 +574,19 @@ def render_html(board, style, out_path):
     market_html = "<div class=\"market\">%s</div>" % "".join(cells) if cells else ""
 
     body = []
-    for row, n in zip(board["rows"], shown):
-        items = []
-        for item in row["items"][:n]:
-            inner = "".join(_seg_html(role, text, item["net"], row["kind"])
-                            for role, text in _seg_list(item, row["kind"]))
-            items.append("<span class=\"it\">%s</span>" % inner)
+    for row, lrow in zip(board["rows"], _rows):
+        lines_html = []
+        for line in lrow["lines"]:
+            parts = []
+            for item, segs, _lx in line:
+                inner = "".join(_seg_html(role, text, item["net"], row["kind"])
+                                for role, text in segs)
+                parts.append("<span class=\"it\">%s</span>" % inner)
+            ln_cls = "ln" if len(line) >= per else "ln part"
+            lines_html.append("<div class=\"%s\">%s</div>" % (ln_cls, "".join(parts)))
         cls = "row g" if row["label"] in groups else "row"
         body.append("<div class=\"%s\"><div class=\"lab\">%s</div><div class=\"items\">%s</div></div>"
-                    % (cls, html_mod.escape(row["label"]), "".join(items)))
+                    % (cls, html_mod.escape(row["label"]), "".join(lines_html)))
 
     frame_html = ""
     if fr.get("enabled"):
