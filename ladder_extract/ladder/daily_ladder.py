@@ -938,7 +938,7 @@ def draw_name_tag(draw, name, code, cx, cy, max_w, fs, fill):
     """股名居中，创业板在名字右侧挂一枚品红「创」小牌；名字+牌 作为整体居中。
     返回 (股名实际中心 x, 股名所用字体)，供未晋级红叉按实际字形定位。"""
     tag = market_tag(code)
-    side = round(fs * 1.06)                # 方块边长：略小于股名字高
+    side = round(fs * 0.92)                # 方块边长：比股名字号小一号
     gap = max(2, int(round(fs * 0.10)))
     reserve = side + gap if tag else 0
     nf = fit_font(draw, name, max_w - reserve, fs, True, mn=12)
@@ -950,7 +950,7 @@ def draw_name_tag(draw, name, code, cx, cy, max_w, fs, fill):
         bx = x0 + nw + gap
         paste_rrect(_IMG, CHIP_CY, bx, cy - side / 2, side, side,
                     max(2, round(side * 0.2)))
-        draw.text((bx + side / 2, cy + 1), tag, font=F(max(9, round(fs * 0.66)), True),
+        draw.text((bx + side / 2, cy), tag, font=F(max(9, round(fs * 0.58)), True),
                   fill=WHITE, anchor="mm")
     return ncx, nf
 
