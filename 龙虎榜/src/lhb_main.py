@@ -47,10 +47,10 @@ def main():
     blue_cfg = os.path.join(CONFIG_DIR, "样式_蓝框.json")
     if os.path.exists(blue_cfg):
         styles.append(("_蓝框", lhb_build.load_json(blue_cfg)))
-    # 天梯风：参考「连板天梯」版式，需要大盘数据
+    # 天梯风：参考「连板天梯」版式
     ladder = dict(style)
     ladder["renderer"] = "ladder"
-    ladder["show_market"] = True
+    ladder["show_market"] = False
     styles.append(("_天梯", ladder))
 
     latest = lhb_fetch.resolve_trade_date()

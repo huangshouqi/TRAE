@@ -2,19 +2,7 @@
  "date": "2026-10-21",
  "m": 10,
  "d": 21,
- "market": {
-  "index": {
-   "name": "上证指数",
-   "point": 3713.03,
-   "chg_pct": -0.5980665904582327,
-   "chg_amt": -22.33999999999969
-  },
-  "zt": 50,
-  "dt": 5,
-  "up": null,
-  "down": null,
-  "flat": null
- },
+ "market": null,
  "rows": [
   {
    "label": "章盟主",
