@@ -18,8 +18,9 @@ _font_cache = {}
 _FALLBACK_FONTS = [
     "/System/Library/Fonts/PingFang.ttc",
     "/System/Library/Fonts/STHeiti Medium.ttc",
-    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
-    "/usr/share/fonts/opentype/noto/NotoSansCJK-Medium.ttc",
+    # 简体中文字重优先，避免落到 Noto 的 JP 字面（“关/春”等字形会不对）
+    "/usr/share/fonts/opentype/noto-cjk-otf/NotoSansCJKsc-Bold.otf",
+    "/usr/share/fonts/opentype/noto-cjk-otf/NotoSansCJKsc-Regular.otf",
     "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
     "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
 ]

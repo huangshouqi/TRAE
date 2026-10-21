@@ -44,9 +44,10 @@ def main():
     mapping = lhb_build.load_json(os.path.join(CONFIG_DIR, "席位映射.json"))
 
     styles = [("", style)]
-    blue_cfg = os.path.join(CONFIG_DIR, "样式_蓝框.json")
-    if os.path.exists(blue_cfg):
-        styles.append(("_蓝框", lhb_build.load_json(blue_cfg)))
+    for tag, filename in (("_蓝框", "样式_蓝框.json"), ("_红框", "样式_红框.json")):
+        cfg = os.path.join(CONFIG_DIR, filename)
+        if os.path.exists(cfg):
+            styles.append((tag, lhb_build.load_json(cfg)))
     # 天梯风：参考「连板天梯」版式
     ladder = dict(style)
     ladder["renderer"] = "ladder"
