@@ -13,6 +13,16 @@ from lhb_build import fmt_amount
 
 _font_cache = {}
 
+# 配置里的字体路径按 Windows 编写；在 macOS / Linux 上按顺序兜底，避免渲染成方块
+_FALLBACK_FONTS = [
+    "/System/Library/Fonts/PingFang.ttc",
+    "/System/Library/Fonts/STHeiti Medium.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Medium.ttc",
+    "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+    "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+]
+
 # 相邻片段之间的间距
 _GAPS = {("chip", "name"): 9, ("name", "three"): 2, ("three", "amt"): 5, ("name", "amt"): 11}
 _DEFAULT_GAP = 6
@@ -23,11 +33,25 @@ def _hex(color):
     return tuple(int(color[i:i + 2], 16) for i in (0, 2, 4))
 
 
+def _market_cells(market):
+    """返回大盘概览条可展示的栏目；空数据时返回空列表，避免占位留白。"""
+    if not market:
+        return []
+    cells = []
+    if market.get("index"):
+        cells.append("index")
+    if market.get("up") is not None:
+        cells.append("breadth")
+    if market.get("zt") is not None:
+        cells.append("limit")
+    return cells
+
+
 def _font(paths, size):
     key = (tuple(paths), size)
     if key not in _font_cache:
         font = None
-        for path in paths:
+        for path in list(paths) + _FALLBACK_FONTS:
             try:
                 font = ImageFont.truetype(path, size)
                 break
@@ -144,13 +168,7 @@ def _draw_market(d, W, y0, style, market, c_up, c_down):
     h = m["height"]
     d.rounded_rectangle([x0, y0, x1, y0 + h], radius=m["radius"], fill=_hex(m["bg"]))
 
-    cells = []
-    if market.get("index"):
-        cells.append("index")
-    if market.get("up") is not None:
-        cells.append("breadth")
-    if market.get("zt") is not None:
-        cells.append("limit")
+    cells = _market_cells(market)
     if not cells:
         return
 
@@ -239,6 +257,18 @@ def _apply_watermark(img, W, H, style):
     return Image.alpha_composite(img.convert("RGBA"), ov).convert("RGB")
 
 
+def _fit_pad(style):
+    """适配画布时给装饰边框预留的内边距，避免内容压到边框线上。"""
+    fit = style.get("fit") or {}
+    pad = fit.get("pad", 0)
+    fr = style.get("frame") or {}
+    if fr.get("enabled"):
+        inset = (fr.get("margin", 6) + fr.get("width", 10) +
+                 fr.get("inner_gap", 7) + (fr.get("inner_width", 2) or 0))
+        pad = max(pad, inset)
+    return pad
+
+
 def _fit_canvas(img, style):
     """把版面等比缩放并居中放进目标画布（3:4 / 9:16）。
     max_scale 默认 1，内容比画布小时不放大，避免栅格模糊。"""
@@ -246,7 +276,7 @@ def _fit_canvas(img, style):
     if not fit.get("enabled"):
         return img
     TW, TH = fit.get("w", 1080), fit.get("h", 1440)
-    pad = fit.get("pad", 0)
+    pad = _fit_pad(style)
     w, h = img.size
     s = min((TW - 2 * pad) / float(w), (TH - 2 * pad) / float(h),
             float(fit.get("max_scale", 1)))
@@ -279,8 +309,9 @@ def render_png(board, style, out_path):
     body_h = sum(r["height"] for r in rows)
 
     market = board.get("market") if style.get("show_market", True) else None
+    market_cells = _market_cells(market)
     list_top = title["height"]
-    if market:
+    if market_cells:
         list_top += style["market"]["height"] + style["market"]["margin_bottom"]
     H = list_top + body_h + footer["height"]
 
@@ -294,7 +325,7 @@ def render_png(board, style, out_path):
     _draw_accent(d, W, style)
 
     # 大盘概览条
-    if market:
+    if market_cells:
         _draw_market(d, W, title["height"], style, market, c_up, c_down)
 
     # 列表
@@ -364,30 +395,45 @@ def render_html(board, style, out_path):
     # 画布适配：HTML 预览用 transform 等比缩放来模拟 3:4 / 9:16
     probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
     _rows = _layout(board, style, probe, (W - pad_x - c["right_pad"]) - (pad_x + label_w))
+    # PNG 会按 max_lines 截断，HTML 同步截断，避免预览比成图多出内容
+    shown = [sum(len(line) for line in r["lines"]) for r in _rows]
+    market_cells = _market_cells(market)
     board_h = title["height"] + sum(r["height"] for r in _rows) + footer["height"]
-    if use_market and board.get("market"):
+    if market_cells:
         board_h += m["height"] + m["margin_bottom"]
     fit = style.get("fit") or {}
+    fpad = _fit_pad(style)
     if fit.get("enabled"):
         sw, sh, sbg = fit.get("w", 1080), fit.get("h", 1440), fit.get("bg", "#FFFFFF")
-        sc = min((sw - 2 * fit.get("pad", 0)) / float(W),
-                 (sh - 2 * fit.get("pad", 0)) / float(board_h),
+        sc = min((sw - 2 * fpad) / float(W),
+                 (sh - 2 * fpad) / float(board_h),
                  float(fit.get("max_scale", 1)))
     else:
         sw, sh, sbg, sc = W, board_h, "#FFFFFF", 1.0
 
+    # 行高按 PNG 的 first_line_center / line_pitch 换算，保证预览与成图高度一致
+    lp = c["line_pitch"]
+    row_pt = max(0, int(round(c["first_line_center"] - lp / 2.0)))
+    row_pb = max(0, int(round(c["base_height"] - c["first_line_center"] - lp / 2.0)))
+    gp = style["row"]["group_pad"]
+    glw = style["row"]["group_line_width"]
+    g_pt = max(0, row_pt + gp - glw)
+    g_pb = row_pb + gp
+    title_line = int(round(title["center_y"] * 2))
+    foot_line = max(1, footer["height"] - 1)
+
     css = """
   html,body{margin:0;padding:28px 0;background:#f2f3f5;}
-  .stage{width:%(sw)dpx;height:%(sh)dpx;margin:0 auto;background:%(sbg)s;overflow:hidden;
+  .stage{position:relative;width:%(sw)dpx;height:%(sh)dpx;margin:0 auto;background:%(sbg)s;overflow:hidden;
          display:flex;align-items:center;justify-content:center;}
   .stage>.board{transform:scale(%(sc)s);}
   .board{position:relative;overflow:hidden;width:%(W)dpx;margin:0 auto;background:#fff;box-sizing:border-box;
-         padding:0 %(pad)dpx;font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;}
-  .board::after{content:"%(wtxt)s";position:absolute;left:50%%;top:50%%;transform:translate(-50%%,-50%%) rotate(%(wang)ddeg);
+         padding:0 %(pad)dpx;font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC",sans-serif;}
+  .stage::after{content:"%(wtxt)s";position:absolute;left:50%%;top:50%%;transform:translate(-50%%,-50%%) rotate(%(wang)ddeg);
                 font-size:%(wfs)dpx;font-weight:700;color:%(wcol)s;opacity:%(wop)s;white-space:nowrap;pointer-events:none;z-index:9;}
   .fr{position:absolute;inset:%(fmg)dpx;border:%(fwid)dpx solid %(fcol)s;border-radius:%(frad)dpx;pointer-events:none;z-index:8;}
   .fri{position:absolute;inset:%(fii)dpx;border:%(fiw)dpx solid %(ficol)s;border-radius:%(firad)dpx;pointer-events:none;z-index:8;}
-  .title{position:relative;height:%(th)dpx;line-height:%(th)dpx;text-align:center;color:%(tc)s;
+  .title{position:relative;height:%(th)dpx;line-height:%(tline)dpx;text-align:center;color:%(tc)s;
          font-weight:700;font-size:%(tf)dpx;}
   .title::after{content:"";position:absolute;left:50%%;top:%(aty)dpx;transform:translateX(-50%%);
                 width:%(atw)dpx;height:%(ath)dpx;border-radius:%(athr)dpx;background:%(atc)s;}
@@ -399,11 +445,11 @@ def render_html(board, style, out_path):
   .mbig{font-size:%(mbs)dpx;font-weight:700;line-height:1.15;}
   .mnum{font-size:%(mns)dpx;font-weight:700;line-height:1.15;}
   .up{color:%(cup)s;} .down{color:%(cdn)s;} .bk{color:#111;}
-  .row{display:flex;align-items:flex-start;padding:%(rp)dpx 0;box-sizing:border-box;}
-  .row.g{border-top:%(glw)dpx solid %(glc)s;}
+  .row{display:flex;align-items:flex-start;padding:%(rpt)dpx 0 %(rpb)dpx;box-sizing:border-box;}
+  .row.g{border-top:%(glw)dpx solid %(glc)s;padding:%(gpt)dpx 0 %(gpb)dpx;}
   .lab{width:%(lw)dpx;flex:0 0 %(lw)dpx;font-weight:700;font-size:%(lf)dpx;color:%(lc)s;
-       line-height:%(bh)dpx;}
-  .items{flex:1;font-size:%(bf)dpx;font-weight:700;line-height:%(bh)dpx;}
+       line-height:%(lp)dpx;}
+  .items{flex:1;font-size:%(bf)dpx;font-weight:700;line-height:%(lp)dpx;}
   .it{display:inline-block;margin-right:%(ig)dpx;white-space:nowrap;}
   .it>*{display:inline-block;vertical-align:middle;}
   .chip{color:#fff;font-size:%(chf)dpx;font-weight:700;border-radius:%(chrad)dpx;
@@ -411,18 +457,19 @@ def render_html(board, style, out_path):
   .chip.up{background:%(cup)s;} .chip.down{background:%(cdn)s;}
   .nm{margin-right:%(ngf)dpx;}
   .three{color:%(tc3)s;font-size:%(tf3)dpx;margin-right:4px;}
-  .foot{border-top:1px solid %(fline)s;height:%(fh)dpx;line-height:%(fh)dpx;text-align:center;
-        color:%(fc)s;font-size:%(ff)dpx;}
+  .foot{border-top:1px solid %(fline)s;height:%(fh)dpx;line-height:%(flh)dpx;text-align:center;
+        color:%(fc)s;font-size:%(ff)dpx;box-sizing:border-box;}
 """ % dict(W=W, pad=pad_x, th=title["height"], tc=title["color"], tf=title["font_size"],
            mh=m["height"], mbg=m["bg"], mrad=m["radius"], mmb=m["margin_bottom"], mzp=m["zone_pad"],
            mdiv=m["divider"], mls=m["label_size"], mlc=m["label_color"], mbs=m["big_size"],
            mns=m["num_size"], cup=style["color_up"], cdn=style["color_down"],
-           rp=int(c["base_height"] / 2), glw=style["row"]["group_line_width"],
+           rpt=row_pt, rpb=row_pb, gpt=g_pt, gpb=g_pb, lp=lp, tline=title_line,
+           glw=glw,
            glc=style["row"]["group_line_color"], lw=label_w, lf=style["label_col"]["font_size"],
-           lc=style["label_col"]["color"], bh=c["base_height"], bf=c["font_size"], ig=c["item_gap"],
+           lc=style["label_col"]["color"], bf=c["font_size"], ig=c["item_gap"],
            chf=style["chip"]["font_size"], chrad=style["chip"]["radius"], chpx=style["chip"]["pad_x"],
            chg=9, ngf=c["name_gap"], tc3=style["three_color"], tf3=style["three_font_size"],
-           fline=footer["line_color"], fh=footer["height"], fc=footer["color"],
+           fline=footer["line_color"], fh=footer["height"], flh=foot_line, fc=footer["color"],
            ff=footer["font_size"],
            wtxt=(wm.get("text", "") if wm_on else ""), wang=wm.get("angle", -30),
            wfs=wm.get("font_size", 120), wcol=wm.get("color", "#000000"),
@@ -438,25 +485,25 @@ def render_html(board, style, out_path):
 
     idx = market.get("index")
     cells = []
-    if idx:
+    if "index" in market_cells:
         icls = "up" if (idx.get("chg_pct") or 0) >= 0 else "down"
         cells.append("<div class=\"mcol\"><div class=\"mlab\">上证指数</div>"
                      "<div class=\"%s\">%.2f <span class=\"mnum\">%+.2f%%</span></div></div>"
                      % (icls, idx["point"], idx["chg_pct"]))
-    if market.get("up") is not None:
+    if "breadth" in market_cells:
         cells.append("<div class=\"mcol\"><div class=\"mlab\">涨跌家数</div>"
                      "<div class=\"mnum\">涨 <span class=\"up\">%d</span>&nbsp; 跌 "
                      "<span class=\"down\">%d</span></div></div>" % (market["up"], market["down"]))
-    if market.get("zt") is not None:
+    if "limit" in market_cells:
         cells.append("<div class=\"mcol\"><div class=\"mlab\">涨跌停</div>"
                      "<div class=\"mnum\">涨停 <span class=\"up\">%d</span>&nbsp; 跌停 "
                      "<span class=\"down\">%d</span></div></div>" % (market["zt"], market["dt"]))
     market_html = "<div class=\"market\">%s</div>" % "".join(cells) if cells else ""
 
     body = []
-    for row in board["rows"]:
+    for row, n in zip(board["rows"], shown):
         items = []
-        for item in row["items"]:
+        for item in row["items"][:n]:
             inner = "".join(_seg_html(role, text, item["net"], row["kind"])
                             for role, text in _seg_list(item, row["kind"]))
             items.append("<span class=\"it\">%s</span>" % inner)
@@ -470,16 +517,25 @@ def render_html(board, style, out_path):
         if fiw:
             frame_html += "<div class=\"fri\"></div>"
 
+    # 浏览器字体度量与 PIL 存在细微差异，按实际排版尺寸自适应，避免预览被裁切
+    fit_flag = 1 if fit.get("enabled") else 0
+
     doc = ("<!doctype html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\">"
            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
            "<title>%s</title><style>%s</style></head><body><div class=\"stage\">"
-           "<div class=\"board\">%s<div class=\"title\">%s</div>%s%s<div class=\"foot\">%s</div>"
-           "</div></div></body></html>") % (
+           "<div class=\"board\"><div class=\"title\">%s</div>%s%s"
+           "<div class=\"foot\">%s</div></div>%s</div>"
+           "<script>(function(){var st=document.querySelector('.stage'),"
+           "bd=document.querySelector('.board');function fit(){"
+           "if(%d){var p=%d,s=Math.min((st.clientWidth-2*p)/bd.offsetWidth,"
+           "(st.clientHeight-2*p)/bd.offsetHeight);bd.style.transform='scale('+s+')';}"
+           "else{bd.style.transform='none';st.style.height=bd.offsetHeight+'px';}}"
+           "fit();window.addEventListener('load',fit);})();</script>"
+           "</body></html>") % (
         html_mod.escape(title["template"].format(m=board["m"], d=board["d"])), css,
-        frame_html,
         html_mod.escape(title["template"].format(m=board["m"], d=board["d"])),
         market_html, "".join(body),
-        html_mod.escape(footer["text"]))
+        html_mod.escape(footer["text"]), frame_html, fit_flag, fpad)
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(doc)
     return out_path

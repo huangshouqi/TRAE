@@ -6,6 +6,7 @@
     python src/lhb_main.py 2026-10-16     # 指定日期
 """
 import argparse
+import datetime
 import json
 import os
 import sys
@@ -41,6 +42,11 @@ def main():
     style = lhb_build.load_json(os.path.join(CONFIG_DIR, "样式.json"))
     mapping = lhb_build.load_json(os.path.join(CONFIG_DIR, "席位映射.json"))
 
+    styles = [("", style)]
+    blue_cfg = os.path.join(CONFIG_DIR, "样式_蓝框.json")
+    if os.path.exists(blue_cfg):
+        styles.append(("_蓝框", lhb_build.load_json(blue_cfg)))
+
     latest = lhb_fetch.resolve_trade_date()
     date = args.date or latest
     is_latest = (date == latest)
@@ -51,17 +57,20 @@ def main():
         len(raw["stocks"]), len(raw["buys"]), len(raw["sells"]), len(raw["org"])))
     _dump(os.path.join(DATA_DIR, "raw_%s.json" % date), raw)
 
-    board = lhb_build.build(raw, mapping, style)
+    # 仅当样式启用了大盘概览条时才抓取，避免每次跑都多打几个接口
+    market = None
+    if any(st.get("show_market", True) for _, st in styles):
+        today = datetime.date.today().isoformat()
+        live = (date == today)  # 历史日期不能混入当天实时行情
+        market = lhb_fetch.fetch_market(date, with_breadth=live, allow_live=live)
+
+    board = lhb_build.build(raw, mapping, style, market)
     _dump(os.path.join(DATA_DIR, "board_%s.json" % date), board)
     print("聚合：%d 行" % len(board["rows"]))
     for row in board["rows"]:
         print("   %-8s %d 只" % (row["label"], len(row["items"])))
 
     os.makedirs(OUT_DIR, exist_ok=True)
-    styles = [("", style)]
-    blue_cfg = os.path.join(CONFIG_DIR, "样式_蓝框.json")
-    if os.path.exists(blue_cfg):
-        styles.append(("_蓝框", lhb_build.load_json(blue_cfg)))
 
     formats = [
         ("", None),               # 原比例（长图）
@@ -86,7 +95,12 @@ def main():
             print("      %s" % htm)
 
     if args.open_after and first_png:
-        os.startfile(first_png)
+        opener = getattr(os, "startfile", None)
+        if opener:
+            opener(first_png)
+        else:
+            import subprocess
+            subprocess.Popen(["xdg-open", first_png])
 
 
 if __name__ == "__main__":
