@@ -16,7 +16,8 @@ from datetime import datetime, timedelta
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 _PYLIBS = os.path.join(BASE, "pylibs")
-if os.path.isdir(_PYLIBS) and _PYLIBS not in sys.path:
+# pylibs 内是 Windows 版二进制依赖，非 Windows 环境改用系统已安装的包
+if os.name == "nt" and os.path.isdir(_PYLIBS) and _PYLIBS not in sys.path:
     sys.path.insert(0, _PYLIBS)
 
 import pandas as pd
