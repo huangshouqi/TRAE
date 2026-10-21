@@ -91,16 +91,12 @@ def main():
                              "pad": 0, "max_scale": 1, "bg": "#FFFFFF"}
             tag = s_tag + f_tag
             png = os.path.join(OUT_DIR, "龙虎榜_%s%s.png" % (date, tag))
-            htm = os.path.join(OUT_DIR, "龙虎榜_%s%s.html" % (date, tag))
             if st.get("renderer") == "ladder":
                 _, w, h = lhb_ladder.render_png(board, st, png)
-                print("输出：%s (%dx%d)" % (png, w, h))
-                continue
-            _, w, h = lhb_render.render_png(board, st, png)
-            lhb_render.render_html(board, st, htm)
+            else:
+                _, w, h = lhb_render.render_png(board, st, png)
             first_png = first_png or png
             print("输出：%s (%dx%d)" % (png, w, h))
-            print("      %s" % htm)
 
     if args.open_after and first_png:
         opener = getattr(os, "startfile", None)
