@@ -12,7 +12,7 @@ from lhb_render import _font, _hex, _fit_canvas
 K = 2                      # 2 倍高清
 W = 1080 * K
 M = 30 * K                 # 左右页边距
-SEAT_W = 108 * K           # 席位名列宽
+SEAT_W = 124 * K           # 席位名列宽（按 5 字名称为准整体放大）
 SEAT_H = 32 * K
 SEAT_GAP = 10 * K
 CARD_PAD_X = 6 * K
@@ -24,13 +24,14 @@ CELL_GAP = 8 * K
 LINE_GAP = 5 * K
 ROW_GAP = 5 * K
 
-C_RED = "#E03131"
-C_GREEN = "#159A55"
-C_CELL = "#F6F7F9"
-C_CELL_LINE = "#ECEDF0"
-C_ROW_LINE = "#E9EAED"
-C_INK = "#1A1A1A"
-C_GRAY = "#9A9FA8"
+C_RED = "#E41A1A"
+C_GREEN = "#169668"
+C_PAGE = "#FAF5F2"
+C_CELL = "#FBF7F3"
+C_ROW_LINE = "#F4E6DF"
+C_INK = "#26201E"
+C_GRAY = "#A99C95"
+C_FOOT_LINE = "#EFE3DC"
 
 
 def _chunks(items, n):
@@ -46,20 +47,27 @@ def _row_lines(row, style):
     return _chunks(row["items"][:limit * COLS], COLS)
 
 
-def _seat_name(d, x, y, label, style):
-    """席位名：不设底色，字号按列宽自适应到最大。"""
+def _seat_size(labels, style, d):
+    """以最长的 5 字席位名为统一标准，所有席位名用同一字号。"""
     size = 24 * K
-    f = _font(style["font_bold"], size)
-    while d.textlength(label, font=f) > SEAT_W - 8 * K and size > 12 * K:
-        size -= 1
+    avail = SEAT_W - 12 * K
+    while size > 12 * K:
         f = _font(style["font_bold"], size)
-    d.text((x + SEAT_W / 2, y + SEAT_H / 2), label, font=f,
-           fill=_hex(C_INK), anchor="mm")
+        if all(d.textlength(t, font=f) <= avail for t in labels):
+            return size
+        size -= 1
+    return 12 * K
+
+
+def _seat_name(d, x, y, label, size, style):
+    """席位名：左对齐，字号统一。"""
+    d.text((x + 8 * K, y + SEAT_H / 2), label,
+           font=_font(style["font_bold"], size),
+           fill=_hex(C_INK), anchor="lm")
 
 
 def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down):
-    d.rounded_rectangle([x, y, x + w, y + h], radius=6 * K,
-                        fill=_hex(C_CELL), outline=_hex(C_CELL_LINE), width=1 * K)
+    d.rounded_rectangle([x, y, x + w, y + h], radius=6 * K, fill=_hex(C_CELL))
     cy = y + h / 2.0
     if kind == "names":
         size = 18 * K
@@ -102,12 +110,12 @@ def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down):
     d.text((x0, cy), amt, font=f_amt, fill=col, anchor="lm")
 
 
-def _draw_row(d, yy, row, lines, style, c_up, c_down):
+def _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size):
     n = max(1, len(lines))
     h = CARD_PAD_Y * 2 + n * CELL_H + (n - 1) * LINE_GAP
     d.rounded_rectangle([M, yy, W - M, yy + h], radius=8 * K,
                         fill=(255, 255, 255), outline=_hex(C_ROW_LINE), width=1 * K)
-    _seat_name(d, M + CARD_PAD_X, yy + (h - SEAT_H) / 2, row["label"], style)
+    _seat_name(d, M + CARD_PAD_X, yy + (h - SEAT_H) / 2, row["label"], seat_size, style)
 
     x0 = M + CARD_PAD_X + SEAT_W + SEAT_GAP
     area = (W - M - CARD_PAD_X) - x0
@@ -182,15 +190,18 @@ def render_png(board, style, out_path):
     top = 92 * K
     H = int(top + body_h + 30 * K)
 
-    img = Image.new("RGB", (W, H), (255, 255, 255))
+    img = Image.new("RGB", (W, H), _hex(C_PAGE))
     d = ImageDraw.Draw(img)
     _draw_header(d, board, style)
+    seat_size = _seat_size([r["label"] for r in board["rows"]], style, d)
 
     yy = top
     for row, lines, h in rows:
-        _draw_row(d, yy, row, lines, style, c_up, c_down)
+        _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size)
         yy += h + ROW_GAP
 
+    # 页脚分隔线 + 说明文字
+    d.rectangle([M, H - 30 * K, W - M, H - 30 * K + 1 * K], fill=_hex(C_FOOT_LINE))
     f_foot = _font(style["font_bold"], 10 * K)
     d.text((W / 2, H - 15 * K),
            "红色为净买，绿色为净卖；数据由公开信息整理，仅供参考，不构成投资建议。",
@@ -198,7 +209,7 @@ def render_png(board, style, out_path):
 
     st = dict(style)
     st["fit"] = {"enabled": True, "w": W, "h": W * 4 // 3,
-                 "pad": 0, "max_scale": 1, "bg": "#FFFFFF"}
+                 "pad": 0, "max_scale": 1, "bg": C_PAGE}
     img = _fit_canvas(img, st)
     img.save(out_path, "PNG")
     return out_path, img.width, img.height
