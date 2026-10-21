@@ -59,6 +59,15 @@ def main():
     final["center_title"] = True
     styles.append(("_最终版", final))
 
+    # 席位名底部样式备选方案（不改动最终版）
+    for tag, mode in (("_席位标签版", "chip"),
+                      ("_席位色带版", "rail"),
+                      ("_席位暖底版", "rowtint"),
+                      ("_席位红字版", "redtext")):
+        v = dict(final)
+        v["seat_style"] = mode
+        styles.append((tag, v))
+
     latest = lhb_fetch.resolve_trade_date()
     date = args.date or latest
     is_latest = (date == latest)

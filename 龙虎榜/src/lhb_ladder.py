@@ -59,15 +59,31 @@ def _seat_size(labels, style, d):
     return 12 * K
 
 
-def _seat_name(d, x, y, label, size, style):
-    """席位名：左对齐，字号统一。"""
-    d.text((x + 8 * K, y + SEAT_H / 2), label,
-           font=_font(style["font_bold"], size),
-           fill=_hex(C_INK), anchor="lm")
+def _seat_name(d, x, yy, h, label, size, style):
+    """席位名：左对齐、字号统一；支持不同底部样式。"""
+    mode = style.get("seat_style", "plain")
+    f = _font(style["font_bold"], size)
+    cy = yy + h / 2.0
+    tx = x + 8 * K
+
+    if mode == "rail":
+        # 整列浅色底带，右侧圆角
+        d.rounded_rectangle([x - CARD_PAD_X + 2 * K, yy + 2 * K, x + SEAT_W, yy + h - 2 * K],
+                            radius=8 * K, fill=_hex("#F7EDE6"))
+    elif mode == "chip":
+        # 名称自适应浅色标签
+        tw = d.textlength(label, font=f)
+        cw = min(SEAT_W + SEAT_GAP - 16 * K, tw + 16 * K)
+        ch = min(h - 6 * K, 26 * K)
+        d.rounded_rectangle([x, cy - ch / 2, x + cw, cy + ch / 2],
+                            radius=7 * K, fill=_hex("#F1E3D9"))
+
+    fill = _hex(C_RED) if mode == "redtext" else _hex(C_INK)
+    d.text((tx, cy), label, font=f, fill=fill, anchor="lm")
 
 
-def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down):
-    d.rounded_rectangle([x, y, x + w, y + h], radius=6 * K, fill=_hex(C_CELL))
+def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down, cell_bg):
+    d.rounded_rectangle([x, y, x + w, y + h], radius=6 * K, fill=cell_bg)
     cy = y + h / 2.0
     if kind == "names":
         size = 19 * K
@@ -113,9 +129,12 @@ def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down):
 def _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size):
     n = max(1, len(lines))
     h = CARD_PAD_Y * 2 + n * CELL_H + (n - 1) * LINE_GAP
+    mode = style.get("seat_style", "plain")
+    row_bg = _hex("#FAF0E8") if mode == "rowtint" else (255, 255, 255)
+    cell_bg = (255, 255, 255) if mode == "rowtint" else _hex(C_CELL)
     d.rounded_rectangle([M, yy, W - M, yy + h], radius=8 * K,
-                        fill=(255, 255, 255), outline=_hex(C_ROW_LINE), width=1 * K)
-    _seat_name(d, M + CARD_PAD_X, yy + (h - SEAT_H) / 2, row["label"], seat_size, style)
+                        fill=row_bg, outline=_hex(C_ROW_LINE), width=1 * K)
+    _seat_name(d, M + CARD_PAD_X, yy, h, row["label"], seat_size, style)
 
     x0 = M + CARD_PAD_X + SEAT_W + SEAT_GAP
     area = (W - M - CARD_PAD_X) - x0
@@ -126,7 +145,7 @@ def _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size):
         cy = yy + CARD_PAD_Y + ln * (CELL_H + LINE_GAP)
         for i, item in enumerate(line):
             cx = x0 + i * (cw + CELL_GAP)
-            _draw_cell(d, cx, cy, cw, CELL_H, item, row["kind"], style, c_up, c_down)
+            _draw_cell(d, cx, cy, cw, CELL_H, item, row["kind"], style, c_up, c_down, cell_bg)
     return h
 
 
