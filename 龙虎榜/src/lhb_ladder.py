@@ -11,18 +11,18 @@ from lhb_render import _font, _hex, _fit_canvas
 
 K = 2                      # 2 倍高清
 W = 1080 * K
-M = 30 * K                 # 左右页边距
+M = 12 * K                 # 左右页边距（尽量填满画面）
 SEAT_W = 124 * K           # 席位名列宽（按 5 字名称为准整体放大）
-SEAT_H = 32 * K
+SEAT_H = 26 * K
 SEAT_GAP = 10 * K
 CARD_PAD_X = 6 * K
-CARD_PAD_Y = 4 * K
+CARD_PAD_Y = 3 * K
 COLS = 4
 NAME_COLS = 6
-CELL_H = 30 * K
+CELL_H = 24.5 * K
 CELL_GAP = 8 * K
-LINE_GAP = 5 * K
-ROW_GAP = 5 * K
+LINE_GAP = 3 * K
+ROW_GAP = 3 * K
 
 C_RED = "#E41A1A"
 C_GREEN = "#169668"
@@ -70,7 +70,7 @@ def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down):
     d.rounded_rectangle([x, y, x + w, y + h], radius=6 * K, fill=_hex(C_CELL))
     cy = y + h / 2.0
     if kind == "names":
-        size = 18 * K
+        size = 19 * K
         f = _font(style["font_bold"], size)
         while d.textlength(item["name"], font=f) > w - 10 * K and size > 12 * K:
             size -= 1
@@ -83,10 +83,10 @@ def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down):
     f_chip = _font(style["font_bold"], 12 * K)
     chip = "净买" if up else "净卖"
     cw = int(d.textlength(chip, font=f_chip)) + 12 * K
-    ch = 21 * K
+    ch = 18 * K
 
     name = item["name"]
-    size = 18 * K
+    size = 19 * K
     f_name = _font(style["font_bold"], size)
     while d.textlength(name, font=f_name) > w - (cw + 58 * K) and size > 12 * K:
         size -= 1
@@ -145,33 +145,28 @@ def _draw_legend(d, style):
 
 
 def _draw_header(d, board, style):
-    top = 22 * K
-    f_title = _font(style["font_bold"], 43 * K)
+    f_title = _font(style["font_bold"], 52 * K)
     date_txt = "%d月%d日" % (board["m"], board["d"])
     red_txt = "游资龙虎榜"
-    bar_w, gap1, gap2 = 6 * K, 12 * K, 10 * K
+    gap = 10 * K
     w_date = d.textlength(date_txt, font=f_title)
     w_red = d.textlength(red_txt, font=f_title)
 
     if style.get("center_title"):
-        total = bar_w + gap1 + w_date + gap2 + w_red
-        x = (W - total) / 2
+        x = (W - (w_date + gap + w_red)) / 2
     else:
         x = M
 
-    d.rounded_rectangle([x, top + 2 * K, x + bar_w, top + 46 * K],
-                        radius=3 * K, fill=_hex(C_RED))
-    x += bar_w + gap1
-    d.text((x, top + 24 * K), date_txt, font=f_title, fill=_hex(C_INK), anchor="lm")
-    x += w_date + gap2
-    d.text((x, top + 24 * K), red_txt, font=f_title, fill=_hex(C_RED), anchor="lm")
+    d.text((x, 58 * K), date_txt, font=f_title, fill=_hex(C_INK), anchor="lm")
+    x += w_date + gap
+    d.text((x, 58 * K), red_txt, font=f_title, fill=_hex(C_RED), anchor="lm")
 
     if style.get("show_legend"):
         _draw_legend(d, style)
 
     # 红色分隔线
-    d.rectangle([M, 78 * K, W, 83 * K], fill=_hex(C_RED))
-    return 92 * K
+    d.rectangle([M, 100 * K, W - M, 103 * K], fill=_hex(C_RED))
+    return 112 * K
 
 
 def render_png(board, style, out_path):
@@ -187,8 +182,8 @@ def render_png(board, style, out_path):
         body_h += h + ROW_GAP
     body_h = max(0, body_h - ROW_GAP)
 
-    top = 92 * K
-    H = int(top + body_h + 30 * K)
+    top = 112 * K
+    H = int(top + body_h + 51 * K)
 
     img = Image.new("RGB", (W, H), _hex(C_PAGE))
     d = ImageDraw.Draw(img)
@@ -201,9 +196,9 @@ def render_png(board, style, out_path):
         yy += h + ROW_GAP
 
     # 页脚分隔线 + 说明文字
-    d.rectangle([M, H - 30 * K, W - M, H - 30 * K + 1 * K], fill=_hex(C_FOOT_LINE))
+    d.rectangle([M, H - 40 * K, W - M, H - 40 * K + 1 * K], fill=_hex(C_FOOT_LINE))
     f_foot = _font(style["font_bold"], 10 * K)
-    d.text((W / 2, H - 15 * K),
+    d.text((W / 2, H - 20 * K),
            "红色为净买，绿色为净卖；数据由公开信息整理，仅供参考，不构成投资建议。",
            font=f_foot, fill=_hex(C_GRAY), anchor="mm")
 
