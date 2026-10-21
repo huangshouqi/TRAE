@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import lhb_build
 import lhb_fetch
+import lhb_ladder
 import lhb_render
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,6 +47,11 @@ def main():
     blue_cfg = os.path.join(CONFIG_DIR, "样式_蓝框.json")
     if os.path.exists(blue_cfg):
         styles.append(("_蓝框", lhb_build.load_json(blue_cfg)))
+    # 天梯风：参考「连板天梯」版式，需要大盘数据
+    ladder = dict(style)
+    ladder["renderer"] = "ladder"
+    ladder["show_market"] = True
+    styles.append(("_天梯", ladder))
 
     latest = lhb_fetch.resolve_trade_date()
     date = args.date or latest
@@ -86,6 +92,10 @@ def main():
             tag = s_tag + f_tag
             png = os.path.join(OUT_DIR, "龙虎榜_%s%s.png" % (date, tag))
             htm = os.path.join(OUT_DIR, "龙虎榜_%s%s.html" % (date, tag))
+            if st.get("renderer") == "ladder":
+                _, w, h = lhb_ladder.render_png(board, st, png)
+                print("输出：%s (%dx%d)" % (png, w, h))
+                continue
             _, w, h = lhb_render.render_png(board, st, png)
             lhb_render.render_html(board, st, htm)
             first_png = first_png or png
