@@ -46,14 +46,13 @@ def _row_lines(row, style):
 
 
 def _seat_pill(d, x, y, label, style):
-    d.rounded_rectangle([x, y, x + SEAT_W, y + SEAT_H], radius=6, fill=_hex(C_RED))
     size = 18
     f = _font(style["font_bold"], size)
     while d.textlength(label, font=f) > SEAT_W - 10 and size > 11:
         size -= 1
         f = _font(style["font_bold"], size)
     d.text((x + SEAT_W / 2, y + SEAT_H / 2), label, font=f,
-           fill=(255, 255, 255), anchor="mm")
+           fill=_hex(C_INK), anchor="mm")
 
 
 def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down):
