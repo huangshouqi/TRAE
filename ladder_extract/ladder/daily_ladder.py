@@ -982,7 +982,7 @@ def draw_cell(draw, s, x, y, w, h, failed=False, ind_color=None):
     top = y + (h - total) / 2
     c1 = top + lh_n / 2
     c2 = c1 + step
-    c3 = c2 + step
+    c3 = c2 + step - 2                 # 板块行上移 2px，避免贴着单元格/卡片底边
 
     if failed:
         paste_rrect(_IMG, FAIL_BG, x + 3, y + 3, w - 6, h - 6, 8,
