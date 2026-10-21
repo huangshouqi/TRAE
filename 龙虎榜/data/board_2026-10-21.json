@@ -1,0 +1,500 @@
+{
+ "date": "2026-10-21",
+ "m": 10,
+ "d": 21,
+ "market": null,
+ "rows": [
+  {
+   "label": "章盟主",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "长盈精密",
+     "three": true,
+     "net": 86091628.14
+    },
+    {
+     "name": "百洋股份",
+     "three": true,
+     "net": 65076776.0
+    },
+    {
+     "name": "利亚德",
+     "three": false,
+     "net": 64017116.14
+    },
+    {
+     "name": "九阳股份",
+     "three": true,
+     "net": 34958298.22
+    },
+    {
+     "name": "润建股份",
+     "three": false,
+     "net": 22752304.0
+    },
+    {
+     "name": "日海智能",
+     "three": true,
+     "net": 4911012.0
+    },
+    {
+     "name": "永达股份",
+     "three": true,
+     "net": 3563534.1899999976
+    },
+    {
+     "name": "通宇通讯",
+     "three": true,
+     "net": -22523142.0
+    }
+   ]
+  },
+  {
+   "label": "作手新一",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "同为股份",
+     "three": true,
+     "net": 13713808.0
+    },
+    {
+     "name": "慧辰股份",
+     "three": false,
+     "net": -10536282.61
+    }
+   ]
+  },
+  {
+   "label": "炒股养家",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "润建股份",
+     "three": false,
+     "net": 29552096.0
+    },
+    {
+     "name": "日海智能",
+     "three": true,
+     "net": 28992339.2
+    },
+    {
+     "name": "永达股份",
+     "three": true,
+     "net": 7390581.0
+    },
+    {
+     "name": "三峡新材",
+     "three": true,
+     "net": 4360975.0
+    },
+    {
+     "name": "龙旗科技",
+     "three": true,
+     "net": -30134830.0
+    },
+    {
+     "name": "敏芯股份",
+     "three": true,
+     "net": -11832245.12
+    }
+   ]
+  },
+  {
+   "label": "北京中关村",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "长春一东",
+     "three": false,
+     "net": 5343525.0
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": -18641888.94
+    },
+    {
+     "name": "吉大正元",
+     "three": false,
+     "net": -17436577.0
+    }
+   ]
+  },
+  {
+   "label": "紫阳东路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "雪人集团",
+     "three": false,
+     "net": 49785040.0
+    },
+    {
+     "name": "天洋新材",
+     "three": false,
+     "net": 32915407.0
+    }
+   ]
+  },
+  {
+   "label": "国新北京分",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "九阳股份",
+     "three": true,
+     "net": 86791085.27
+    },
+    {
+     "name": "莱美药业",
+     "three": false,
+     "net": 82180152.0
+    },
+    {
+     "name": "粤传媒",
+     "three": true,
+     "net": 75751009.0
+    },
+    {
+     "name": "三维天地",
+     "three": false,
+     "net": 8647356.0
+    },
+    {
+     "name": "兆讯传媒",
+     "three": false,
+     "net": 8647246.4
+    },
+    {
+     "name": "吉大正元",
+     "three": false,
+     "net": -55799214.0
+    },
+    {
+     "name": "凡拓数创",
+     "three": false,
+     "net": -29332038.84
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": -10025042.0
+    }
+   ]
+  },
+  {
+   "label": "上海新闸路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "利亚德",
+     "three": false,
+     "net": 34966588.0
+    }
+   ]
+  },
+  {
+   "label": "粉葛",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": -16551986.95
+    }
+   ]
+  },
+  {
+   "label": "山东帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "大业股份",
+     "three": true,
+     "net": -3959638.0
+    }
+   ]
+  },
+  {
+   "label": "华泰总部",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": 11245441.879999999
+    }
+   ]
+  },
+  {
+   "label": "联储宁波分",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "满坤转债",
+     "three": false,
+     "net": 9082500.0
+    }
+   ]
+  },
+  {
+   "label": "宁波桑田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": 16392662.5
+    }
+   ]
+  },
+  {
+   "label": "彩田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "九阳股份",
+     "three": true,
+     "net": 107207750.54
+    }
+   ]
+  },
+  {
+   "label": "南京帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "莱美药业",
+     "three": false,
+     "net": 39033913.5
+    },
+    {
+     "name": "雪人集团",
+     "three": false,
+     "net": 30808786.0
+    },
+    {
+     "name": "太极股份",
+     "three": true,
+     "net": 19107531.0
+    },
+    {
+     "name": "盐津铺子",
+     "three": false,
+     "net": 6038606.0
+    },
+    {
+     "name": "九阳股份",
+     "three": true,
+     "net": -86403908.28
+    },
+    {
+     "name": "兆讯传媒",
+     "three": false,
+     "net": -48502005.96
+    },
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": -14652844.37
+    },
+    {
+     "name": "慈文传媒",
+     "three": false,
+     "net": -11124623.5
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": -9626473.0
+    },
+    {
+     "name": "时代万恒",
+     "three": false,
+     "net": -9397838.0
+    },
+    {
+     "name": "三维天地",
+     "three": false,
+     "net": -5287880.0
+    },
+    {
+     "name": "日海智能",
+     "three": true,
+     "net": -3162706.0
+    },
+    {
+     "name": "百洋股份",
+     "three": true,
+     "net": -2299686.6099999994
+    }
+   ]
+  },
+  {
+   "label": "深圳帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "三峡新材",
+     "three": true,
+     "net": 7607520.0
+    }
+   ]
+  },
+  {
+   "label": "量化打板",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "龙旗科技",
+     "three": true,
+     "net": 112878899.83
+    },
+    {
+     "name": "凡拓数创",
+     "three": false,
+     "net": 26546371.880000003
+    },
+    {
+     "name": "超声电子",
+     "three": false,
+     "net": 20951251.27
+    },
+    {
+     "name": "敏芯股份",
+     "three": true,
+     "net": 17033212.1
+    },
+    {
+     "name": "致尚科技",
+     "three": false,
+     "net": 16965628.520000003
+    },
+    {
+     "name": "慧辰股份",
+     "three": false,
+     "net": 2480637.9399999995
+    },
+    {
+     "name": "骏亚科技",
+     "three": false,
+     "net": -22746267.0
+    },
+    {
+     "name": "时代万恒",
+     "three": false,
+     "net": -22188430.0
+    },
+    {
+     "name": "果麦文化",
+     "three": false,
+     "net": -9663971.0
+    },
+    {
+     "name": "尚太科技",
+     "three": false,
+     "net": -6070870.6
+    }
+   ]
+  },
+  {
+   "label": "拉萨天团",
+   "kind": "names",
+   "items": [
+    {
+     "name": "雪人集团",
+     "three": false,
+     "net": 35195918.0
+    },
+    {
+     "name": "吉大正元",
+     "three": false,
+     "net": 18526345.0
+    },
+    {
+     "name": "果麦文化",
+     "three": false,
+     "net": 13348270.740000002
+    },
+    {
+     "name": "时代万恒",
+     "three": false,
+     "net": 12375421.0
+    },
+    {
+     "name": "上海洗霸",
+     "three": false,
+     "net": 12060361.0
+    },
+    {
+     "name": "慈文传媒",
+     "three": false,
+     "net": 10777266.0
+    },
+    {
+     "name": "长春一东",
+     "three": false,
+     "net": 5099830.0
+    },
+    {
+     "name": "慕思股份",
+     "three": false,
+     "net": 4685012.1
+    },
+    {
+     "name": "嘉晨智能",
+     "three": false,
+     "net": 4228826.91
+    },
+    {
+     "name": "尚太科技",
+     "three": false,
+     "net": 3879031.0
+    },
+    {
+     "name": "莫森泰克",
+     "three": false,
+     "net": 2345102.4699999997
+    },
+    {
+     "name": "紫竹高科",
+     "three": false,
+     "net": 2142131.0
+    },
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": 2036913.4000000004
+    },
+    {
+     "name": "金健米业",
+     "three": false,
+     "net": -27139220.0
+    },
+    {
+     "name": "莱美药业",
+     "three": false,
+     "net": -19820289.54
+    },
+    {
+     "name": "利亚德",
+     "three": false,
+     "net": -14270514.0
+    },
+    {
+     "name": "冰山冷热",
+     "three": false,
+     "net": -3328933.1900000013
+    },
+    {
+     "name": "肯特股份",
+     "three": false,
+     "net": -2154543.17
+    }
+   ]
+  }
+ ]
+}
