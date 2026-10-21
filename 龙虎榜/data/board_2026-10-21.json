@@ -9,6 +9,11 @@
    "kind": "seat",
    "items": [
     {
+     "name": "移远通信",
+     "three": true,
+     "net": 104437819.91
+    },
+    {
      "name": "长盈精密",
      "three": true,
      "net": 86091628.14
@@ -29,9 +34,14 @@
      "net": 34958298.22
     },
     {
-     "name": "润建股份",
-     "three": false,
-     "net": 22752304.0
+     "name": "安记食品",
+     "three": true,
+     "net": 21738082.0
+    },
+    {
+     "name": "大业股份",
+     "three": true,
+     "net": 9508070.0
     },
     {
      "name": "日海智能",
@@ -67,42 +77,6 @@
    ]
   },
   {
-   "label": "炒股养家",
-   "kind": "seat",
-   "items": [
-    {
-     "name": "润建股份",
-     "three": false,
-     "net": 29552096.0
-    },
-    {
-     "name": "日海智能",
-     "three": true,
-     "net": 28992339.2
-    },
-    {
-     "name": "永达股份",
-     "three": true,
-     "net": 7390581.0
-    },
-    {
-     "name": "三峡新材",
-     "three": true,
-     "net": 4360975.0
-    },
-    {
-     "name": "龙旗科技",
-     "three": true,
-     "net": -30134830.0
-    },
-    {
-     "name": "敏芯股份",
-     "three": true,
-     "net": -11832245.12
-    }
-   ]
-  },
-  {
    "label": "北京中关村",
    "kind": "seat",
    "items": [
@@ -120,6 +94,22 @@
      "name": "吉大正元",
      "three": false,
      "net": -17436577.0
+    }
+   ]
+  },
+  {
+   "label": "北京知春路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "雪人集团",
+     "three": false,
+     "net": 60732046.76
+    },
+    {
+     "name": "超声电子",
+     "three": false,
+     "net": -89514779.0
     }
    ]
   },
@@ -197,6 +187,64 @@
    ]
   },
   {
+   "label": "上海自贸区",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "中恒集团",
+     "three": false,
+     "net": 30968798.0
+    },
+    {
+     "name": "通宇通讯",
+     "three": true,
+     "net": 30957425.0
+    }
+   ]
+  },
+  {
+   "label": "中山东路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "润建股份",
+     "three": false,
+     "net": 29552096.0
+    },
+    {
+     "name": "日海智能",
+     "three": true,
+     "net": 28992339.2
+    },
+    {
+     "name": "永达股份",
+     "three": true,
+     "net": 7390581.0
+    },
+    {
+     "name": "龙旗科技",
+     "three": true,
+     "net": -30134830.0
+    }
+   ]
+  },
+  {
+   "label": "思明南路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "盐津铺子",
+     "three": false,
+     "net": 4615152.0
+    },
+    {
+     "name": "润建股份",
+     "three": false,
+     "net": -11031080.0
+    }
+   ]
+  },
+  {
    "label": "粉葛",
    "kind": "seat",
    "items": [
@@ -230,6 +278,32 @@
    ]
   },
   {
+   "label": "玉兰路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "九阳股份",
+     "three": true,
+     "net": -86403908.28
+    },
+    {
+     "name": "慈文传媒",
+     "three": false,
+     "net": -11124623.5
+    },
+    {
+     "name": "时代万恒",
+     "three": false,
+     "net": -9397838.0
+    },
+    {
+     "name": "百洋股份",
+     "three": true,
+     "net": -2299686.6099999994
+    }
+   ]
+  },
+  {
    "label": "联储宁波分",
    "kind": "seat",
    "items": [
@@ -252,6 +326,27 @@
    ]
   },
   {
+   "label": "炒新一族",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "宇特光电",
+     "three": false,
+     "net": 4070084.8899999997
+    },
+    {
+     "name": "锦龙股份",
+     "three": false,
+     "net": -29377633.0
+    },
+    {
+     "name": "嘉晨智能",
+     "three": false,
+     "net": -3590173.6
+    }
+   ]
+  },
+  {
    "label": "彩田路",
    "kind": "seat",
    "items": [
@@ -263,7 +358,92 @@
    ]
   },
   {
-   "label": "南京帮",
+   "label": "大小说家",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "冰山冷热",
+     "three": false,
+     "net": 52531171.46
+    },
+    {
+     "name": "慈文传媒",
+     "three": false,
+     "net": 24580880.2
+    },
+    {
+     "name": "九阳股份",
+     "three": true,
+     "net": -65183024.92
+    }
+   ]
+  },
+  {
+   "label": "N周二",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "同为股份",
+     "three": true,
+     "net": 13205569.0
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": 13188570.0
+    }
+   ]
+  },
+  {
+   "label": "低位挖掘",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "闽东电力",
+     "three": false,
+     "net": 29401691.22
+    },
+    {
+     "name": "星光股份",
+     "three": true,
+     "net": 14527840.0
+    },
+    {
+     "name": "嘉晨智能",
+     "three": false,
+     "net": 2966864.17
+    }
+   ]
+  },
+  {
+   "label": "成都系",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "润建股份",
+     "three": false,
+     "net": 80707613.0
+    },
+    {
+     "name": "粤传媒",
+     "three": true,
+     "net": 64247641.0
+    }
+   ]
+  },
+  {
+   "label": "基金董事长",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "吉大正元",
+     "three": false,
+     "net": 21639601.0
+    }
+   ]
+  },
+  {
+   "label": "湖州劳动路",
    "kind": "seat",
    "items": [
     {
@@ -280,16 +460,33 @@
      "name": "太极股份",
      "three": true,
      "net": 19107531.0
+    }
+   ]
+  },
+  {
+   "label": "葛卫东",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "致尚科技",
+     "three": false,
+     "net": 64461000.0
     },
+    {
+     "name": "金健米业",
+     "three": false,
+     "net": -17030356.019999996
+    }
+   ]
+  },
+  {
+   "label": "南京帮",
+   "kind": "seat",
+   "items": [
     {
      "name": "盐津铺子",
      "three": false,
      "net": 6038606.0
-    },
-    {
-     "name": "九阳股份",
-     "three": true,
-     "net": -86403908.28
     },
     {
      "name": "兆讯传媒",
@@ -302,19 +499,9 @@
      "net": -14652844.37
     },
     {
-     "name": "慈文传媒",
-     "three": false,
-     "net": -11124623.5
-    },
-    {
      "name": "海洋王",
      "three": true,
      "net": -9626473.0
-    },
-    {
-     "name": "时代万恒",
-     "three": false,
-     "net": -9397838.0
     },
     {
      "name": "三维天地",
@@ -325,11 +512,42 @@
      "name": "日海智能",
      "three": true,
      "net": -3162706.0
+    }
+   ]
+  },
+  {
+   "label": "温州帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "通宇通讯",
+     "three": true,
+     "net": 54567040.1
     },
     {
-     "name": "百洋股份",
+     "name": "天洋新材",
+     "three": false,
+     "net": 24181052.0
+    },
+    {
+     "name": "上海九百",
+     "three": false,
+     "net": 11928564.0
+    },
+    {
+     "name": "海洋王",
      "three": true,
-     "net": -2299686.6099999994
+     "net": 10400903.0
+    },
+    {
+     "name": "永达股份",
+     "three": true,
+     "net": 8233842.6
+    },
+    {
+     "name": "慕思股份",
+     "three": false,
+     "net": -12036481.17
     }
    ]
   },
@@ -354,6 +572,41 @@
      "net": 112878899.83
     },
     {
+     "name": "利亚德",
+     "three": false,
+     "net": 86176358.74
+    },
+    {
+     "name": "粤传媒",
+     "three": true,
+     "net": 51890479.68
+    },
+    {
+     "name": "中恒集团",
+     "three": false,
+     "net": 41494268.0
+    },
+    {
+     "name": "金健米业",
+     "three": false,
+     "net": 37458689.84
+    },
+    {
+     "name": "敏芯股份",
+     "three": true,
+     "net": 34625332.11
+    },
+    {
+     "name": "上海九百",
+     "three": false,
+     "net": 34304476.83
+    },
+    {
+     "name": "慧辰股份",
+     "three": false,
+     "net": 28214233.42
+    },
+    {
      "name": "凡拓数创",
      "three": false,
      "net": 26546371.880000003
@@ -364,9 +617,14 @@
      "net": 20951251.27
     },
     {
-     "name": "敏芯股份",
-     "three": true,
-     "net": 17033212.1
+     "name": "均瑶健康",
+     "three": false,
+     "net": 18186309.4
+    },
+    {
+     "name": "沈鼓集团",
+     "three": false,
+     "net": 17328236.12
     },
     {
      "name": "致尚科技",
@@ -374,14 +632,44 @@
      "net": 16965628.520000003
     },
     {
-     "name": "慧辰股份",
+     "name": "上海洗霸",
      "three": false,
-     "net": 2480637.9399999995
+     "net": 16041224.0
+    },
+    {
+     "name": "日海智能",
+     "three": true,
+     "net": 13103200.0
+    },
+    {
+     "name": "泰尔股份",
+     "three": true,
+     "net": 11699145.0
+    },
+    {
+     "name": "天洋新材",
+     "three": false,
+     "net": 11040137.0
+    },
+    {
+     "name": "星光股份",
+     "three": true,
+     "net": 10445387.0
+    },
+    {
+     "name": "兆讯传媒",
+     "three": false,
+     "net": 5817025.15
     },
     {
      "name": "骏亚科技",
      "three": false,
-     "net": -22746267.0
+     "net": -51691037.31
+    },
+    {
+     "name": "海洋王",
+     "three": true,
+     "net": -39448640.0
     },
     {
      "name": "时代万恒",
@@ -397,6 +685,11 @@
      "name": "尚太科技",
      "three": false,
      "net": -6070870.6
+    },
+    {
+     "name": "通宇通讯",
+     "three": true,
+     "net": -3409215.879999999
     }
    ]
   },
