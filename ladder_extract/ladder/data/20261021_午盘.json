@@ -38,7 +38,7 @@
    "code": "002724",
    "name": "海洋王",
    "pct": 10.04,
-   "industry": "照明设备Ⅱ",
+   "industry": "照明设备",
    "seal": 271037818.0,
    "amount": 42331176.0,
    "first_time": "09:25",
@@ -86,7 +86,7 @@
    "code": "002076",
    "name": "星光股份",
    "pct": 9.87,
-   "industry": "照明设备Ⅱ",
+   "industry": "照明设备",
    "seal": 182639905.0,
    "amount": 133610862.0,
    "first_time": "09:30",
@@ -134,7 +134,7 @@
    "code": "603138",
    "name": "海量数据",
    "pct": 10.01,
-   "industry": "IT服务Ⅱ",
+   "industry": "IT服务",
    "seal": 125856078.0,
    "amount": 222487770.0,
    "first_time": "09:30",
@@ -406,7 +406,7 @@
    "code": "600252",
    "name": "中恒集团",
    "pct": 10.19,
-   "industry": "中药Ⅱ",
+   "industry": "中药",
    "seal": 69903763.0,
    "amount": 594131936.0,
    "first_time": "09:33",
@@ -486,7 +486,7 @@
    "code": "002811",
    "name": "郑中设计",
    "pct": 10.02,
-   "industry": "装修装饰Ⅱ",
+   "industry": "装修装饰",
    "seal": 103697981.0,
    "amount": 493954160.0,
    "first_time": "10:04",
@@ -550,7 +550,7 @@
    "code": "603636",
    "name": "南威软件",
    "pct": 10.01,
-   "industry": "IT服务Ⅱ",
+   "industry": "IT服务",
    "seal": 202303212.0,
    "amount": 777274416.0,
    "first_time": "11:04",
@@ -576,7 +576,7 @@
    "stat_a": 1,
    "stat_b": 1,
    "open_limit": false,
-   "theme": "海峡两岸"
+   "theme": "化工"
   },
   {
    "code": "002940",
@@ -592,7 +592,7 @@
    "stat_a": 2,
    "stat_b": 2,
    "open_limit": false,
-   "theme": "医药"
+   "theme": "化工"
   },
   {
    "code": "000518",
@@ -630,7 +630,7 @@
    "code": "600271",
    "name": "航天信息",
    "pct": 9.96,
-   "industry": "IT服务Ⅱ",
+   "industry": "IT服务",
    "seal": 470028760.0,
    "amount": 148058739.0,
    "first_time": "11:17",
@@ -646,7 +646,7 @@
    "code": "002368",
    "name": "太极股份",
    "pct": 9.97,
-   "industry": "IT服务Ⅱ",
+   "industry": "IT服务",
    "seal": 519543962.0,
    "amount": 697027024.0,
    "first_time": "11:19",
@@ -678,7 +678,7 @@
    "code": "002777",
    "name": "久远银海",
    "pct": 10.01,
-   "industry": "IT服务Ⅱ",
+   "industry": "IT服务",
    "seal": 290396642.0,
    "amount": 533463648.0,
    "first_time": "11:24",
@@ -688,13 +688,13 @@
    "stat_a": 1,
    "stat_b": 1,
    "open_limit": false,
-   "theme": "数据要素"
+   "theme": "医药"
   },
   {
    "code": "688500",
    "name": "慧辰股份",
    "pct": 20.0,
-   "industry": "IT服务Ⅱ",
+   "industry": "IT服务",
    "seal": 189993015.0,
    "amount": 200784027.0,
    "first_time": "11:27",
@@ -730,7 +730,7 @@
     "name": "凡拓数创",
     "industry": "数字媒体",
     "pct": 12.18,
-    "theme": "传媒"
+    "theme": "数据要素"
    },
    {
     "code": "605488",
@@ -781,7 +781,7 @@
     "name": "吉大正元",
     "industry": "软件开发",
     "pct": 4.77,
-    "theme": "汽车"
+    "theme": "军工"
    }
   ]
  },

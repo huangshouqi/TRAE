@@ -915,6 +915,13 @@ FAIL_IND = (178, 168, 160)
 FAIL_UP = (255, 0, 0)       # 未晋级收红（主色）
 FAIL_DOWN = (72, 156, 106)  # 未晋级收绿
 FAIL_X = (232, 122, 120)    # 小红叉：与未晋级股名同淡度（半透明红）
+CHIP_CY = (196, 17, 224)    # 创业板标识：品红方块（参考图取色）
+
+
+def market_tag(code):
+    """创业板（300/301/302）返回「创」，其余返回 None"""
+    return "创" if str(code)[:3] in ("300", "301", "302") else None
+
 
 
 def _fit_ind(draw, ind, max_w, fs):
@@ -925,6 +932,27 @@ def _fit_ind(draw, ind, max_w, fs):
     while t and tw(draw, t + "…", af) > max_w:
         t = t[:-1]
     return (t or ind[:1]) + "…"
+
+
+def draw_name_tag(draw, name, code, cx, cy, max_w, fs, fill):
+    """股名居中，创业板在名字右侧挂一枚品红「创」小牌；名字+牌 作为整体居中。
+    返回 (股名实际中心 x, 股名所用字体)，供未晋级红叉按实际字形定位。"""
+    tag = market_tag(code)
+    side = round(fs * 1.06)                # 方块边长：略小于股名字高
+    gap = max(2, int(round(fs * 0.10)))
+    reserve = side + gap if tag else 0
+    nf = fit_font(draw, name, max_w - reserve, fs, True, mn=12)
+    nw = tw(draw, name, nf)
+    x0 = cx - (nw + reserve) / 2
+    ncx = x0 + nw / 2
+    draw.text((ncx, cy), name, font=nf, fill=fill, anchor="mm")
+    if tag:
+        bx = x0 + nw + gap
+        paste_rrect(_IMG, CHIP_CY, bx, cy - side / 2, side, side,
+                    max(2, round(side * 0.2)))
+        draw.text((bx + side / 2, cy + 1), tag, font=F(max(9, round(fs * 0.66)), True),
+                  fill=WHITE, anchor="mm")
+    return ncx, nf
 
 
 def draw_cell(draw, s, x, y, w, h, failed=False, ind_color=None):
@@ -963,10 +991,10 @@ def draw_cell(draw, s, x, y, w, h, failed=False, ind_color=None):
         ps = f"{'+' if pct >= 0 else ''}{pct:.2f}%"
         draw.text((cx, c1), ps, font=F(fs_t, True), anchor="mm",
                   fill=FAIL_UP if pct >= 0 else FAIL_DOWN)
-        nf = fit_font(draw, s["name"], inner, fs_n, True, mn=12)
-        draw.text((cx, c2), s["name"], font=nf, fill=FAIL_NAME, anchor="mm")
+        ncx, nf = draw_name_tag(draw, s["name"], s["code"], cx, c2, inner, fs_n,
+                                FAIL_NAME)
         # 小红叉：按股名实际字形包围盒正中覆盖
-        nb = draw.textbbox((cx, c2), s["name"], font=nf, anchor="mm")
+        nb = draw.textbbox((ncx, c2), s["name"], font=nf, anchor="mm")
         xc, yc = (nb[0] + nb[2]) / 2, (nb[1] + nb[3]) / 2
         r = max(7, min(nb[2] - nb[0], nb[3] - nb[1]) * 0.34)
         for sgn in (1, -1):
@@ -986,9 +1014,8 @@ def draw_cell(draw, s, x, y, w, h, failed=False, ind_color=None):
     else:
         ts_ = s["last_time"] or "--:--"
         draw.text((cx, c1), ts_, font=F(fs_t, True), anchor="mm", fill=GRAY_T)
-    # 第二行：股票名称（居中，黑色）
-    nf = fit_font(draw, s["name"], inner, fs_n, True, mn=12)
-    draw.text((cx, c2), s["name"], font=nf, fill=INK, anchor="mm")
+    # 第二行：股票名称（居中，黑色；创业板挂「创」小牌）
+    draw_name_tag(draw, s["name"], s["code"], cx, c2, inner, fs_n, INK)
     # 第三行：所属板块（居中）
     ind_s = _fit_ind(draw, ind_lbl, inner, fs_s)
     draw.text((cx, c3), ind_s, font=F(fs_s, True), anchor="mm",
