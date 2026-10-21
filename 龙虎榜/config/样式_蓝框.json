@@ -82,7 +82,7 @@
   "watermark": {
     "enabled": true,
     "text": "©路扬LuYang",
-    "font_size": 66,
+    "font_size": 99,
     "opacity": 0.05,
     "angle": -30,
     "color": "#1E5AA8"
