@@ -126,9 +126,9 @@ def _draw_cell(d, x, y, w, h, item, kind, style, c_up, c_down, cell_bg):
     d.text((x0, cy), amt, font=f_amt, fill=col, anchor="lm")
 
 
-def _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size):
+def _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size, cell_h):
     n = max(1, len(lines))
-    h = CARD_PAD_Y * 2 + n * CELL_H + (n - 1) * LINE_GAP
+    h = CARD_PAD_Y * 2 + n * cell_h + (n - 1) * LINE_GAP
     mode = style.get("seat_style", "plain")
     row_bg = _hex("#FAF0E8") if mode == "rowtint" else (255, 255, 255)
     cell_bg = (255, 255, 255) if mode == "rowtint" else _hex(C_CELL)
@@ -142,10 +142,10 @@ def _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size):
     cw = (area - (cols - 1) * CELL_GAP) / float(cols)
 
     for ln, line in enumerate(lines):
-        cy = yy + CARD_PAD_Y + ln * (CELL_H + LINE_GAP)
+        cy = yy + CARD_PAD_Y + ln * (cell_h + LINE_GAP)
         for i, item in enumerate(line):
             cx = x0 + i * (cw + CELL_GAP)
-            _draw_cell(d, cx, cy, cw, CELL_H, item, row["kind"], style, c_up, c_down, cell_bg)
+            _draw_cell(d, cx, cy, cw, cell_h, item, row["kind"], style, c_up, c_down, cell_bg)
     return h
 
 
@@ -190,19 +190,44 @@ def _draw_header(d, board, style):
 
 def render_png(board, style, out_path):
     c_up, c_down = style.get("color_up", "#D63333"), style.get("color_down", "#159A55")
+    top = 112 * K
+    H = W * 4 // 3
+    avail = H - top - 51 * K
 
-    rows = []
-    body_h = 0
+    rows0 = []
+    lines_total = 0
+    extra_lines = 0
     for row in board["rows"]:
         lines = _row_lines(row, style)
         n = max(1, len(lines))
-        h = CARD_PAD_Y * 2 + n * CELL_H + (n - 1) * LINE_GAP
-        rows.append((row, lines, h))
-        body_h += h + ROW_GAP
-    body_h = max(0, body_h - ROW_GAP)
+        rows0.append((row, lines))
+        lines_total += n
+        extra_lines += n - 1
 
-    top = 112 * K
-    H = int(top + body_h + 51 * K)
+    rn = len(rows0)
+    base = (rn * CARD_PAD_Y * 2 + lines_total * CELL_H
+            + extra_lines * LINE_GAP + (rn - 1) * ROW_GAP)
+    extra = avail - base
+
+    rg, cell_h = ROW_GAP, CELL_H
+    if extra >= 0:
+        if rn > 1:
+            add = min(extra / (rn - 1.0), 4 * K)
+            rg += add
+            extra -= add * (rn - 1)
+        cell_h += extra / max(1, lines_total)
+    else:
+        deficit = -extra
+        if rn > 1:
+            cut = min(deficit / (rn - 1.0), max(0.0, ROW_GAP - 4 * K))
+            rg -= cut
+            deficit -= cut * (rn - 1)
+        cell_h = max(44.0, CELL_H - deficit / max(1, lines_total))
+
+    rows = []
+    for row, lines in rows0:
+        n = max(1, len(lines))
+        rows.append((row, lines, CARD_PAD_Y * 2 + n * cell_h + (n - 1) * LINE_GAP))
 
     img = Image.new("RGB", (W, H), _hex(C_PAGE))
     d = ImageDraw.Draw(img)
@@ -211,8 +236,8 @@ def render_png(board, style, out_path):
 
     yy = top
     for row, lines, h in rows:
-        _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size)
-        yy += h + ROW_GAP
+        _draw_row(d, yy, row, lines, style, c_up, c_down, seat_size, cell_h)
+        yy += h + rg
 
     # 页脚分隔线 + 说明文字
     d.rectangle([M, H - 40 * K, W - M, H - 40 * K + 1 * K], fill=_hex(C_FOOT_LINE))
