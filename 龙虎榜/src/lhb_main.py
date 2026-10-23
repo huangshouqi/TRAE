@@ -52,6 +52,8 @@ def main():
     ladder = dict(style)
     ladder["renderer"] = "ladder"
     ladder["show_market"] = False
+    # 普通席位行放宽到 4 行，避免 13/14 只的席位被截断
+    ladder["max_lines"] = dict(style.get("max_lines") or {}, _default=4)
     styles.append(("_天梯", ladder))
 
     # 最终版：天梯版式 + 居中主标题（3:4 高清）
