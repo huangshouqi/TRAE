@@ -1,0 +1,665 @@
+{
+ "date": "2026-10-27",
+ "m": 10,
+ "d": 27,
+ "market": null,
+ "rows": [
+  {
+   "label": "章盟主",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "百大集团",
+     "three": true,
+     "net": 31208483.12
+    },
+    {
+     "name": "桂发祥",
+     "three": true,
+     "net": 27758741.73
+    },
+    {
+     "name": "林州重机",
+     "three": false,
+     "net": 6416696.0
+    },
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": -42501151.18
+    },
+    {
+     "name": "上海九百",
+     "three": true,
+     "net": -12500769.0
+    }
+   ]
+  },
+  {
+   "label": "作手新一",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "大洋电机",
+     "three": false,
+     "net": 43710590.0
+    },
+    {
+     "name": "慈文传媒",
+     "three": false,
+     "net": 18851582.0
+    },
+    {
+     "name": "横河精密",
+     "three": false,
+     "net": 14790806.44
+    },
+    {
+     "name": "皇台酒业",
+     "three": true,
+     "net": -33524171.6
+    }
+   ]
+  },
+  {
+   "label": "北京中关村",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "桂发祥",
+     "three": true,
+     "net": 13415094.0
+    },
+    {
+     "name": "科瑞思",
+     "three": true,
+     "net": 10651197.0
+    },
+    {
+     "name": "奇精机械",
+     "three": false,
+     "net": 1851162.0
+    },
+    {
+     "name": "多伦科技",
+     "three": true,
+     "net": -22527935.0
+    },
+    {
+     "name": "世纪恒通",
+     "three": false,
+     "net": -17877579.64
+    }
+   ]
+  },
+  {
+   "label": "北京知春路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "大洋电机",
+     "three": false,
+     "net": 101080874.0
+    },
+    {
+     "name": "新华百货",
+     "three": true,
+     "net": 1018108.0
+    },
+    {
+     "name": "天娱数科",
+     "three": false,
+     "net": -121830127.74
+    }
+   ]
+  },
+  {
+   "label": "紫阳东路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "大洋电机",
+     "three": false,
+     "net": 122279112.25
+    },
+    {
+     "name": "横河精密",
+     "three": false,
+     "net": 29920406.0
+    },
+    {
+     "name": "胜通能源",
+     "three": true,
+     "net": 29895327.0
+    },
+    {
+     "name": "华正新材",
+     "three": false,
+     "net": -98584385.0
+    },
+    {
+     "name": "星光股份",
+     "three": true,
+     "net": -27462403.0
+    }
+   ]
+  },
+  {
+   "label": "国新北京分",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "光洋股份",
+     "three": true,
+     "net": 70981580.46
+    },
+    {
+     "name": "科瑞思",
+     "three": true,
+     "net": 8634798.1
+    },
+    {
+     "name": "襄阳轴承",
+     "three": true,
+     "net": -71915127.66
+    },
+    {
+     "name": "多伦科技",
+     "three": true,
+     "net": -32805474.25
+    },
+    {
+     "name": "杰克科技",
+     "three": true,
+     "net": -7343551.329999998
+    }
+   ]
+  },
+  {
+   "label": "上海自贸区",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "大洋电机",
+     "three": false,
+     "net": 40958610.0
+    },
+    {
+     "name": "冰山冷热",
+     "three": false,
+     "net": -16833380.0
+    }
+   ]
+  },
+  {
+   "label": "中山东路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "胜通能源",
+     "three": true,
+     "net": 17893876.0
+    },
+    {
+     "name": "星光股份",
+     "three": true,
+     "net": -23779393.0
+    }
+   ]
+  },
+  {
+   "label": "思明南路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "科瑞思",
+     "three": true,
+     "net": 14882580.8
+    }
+   ]
+  },
+  {
+   "label": "山东帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "南方乳业",
+     "three": false,
+     "net": 2348978.05
+    }
+   ]
+  },
+  {
+   "label": "华泰总部",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "秦安股份",
+     "three": false,
+     "net": 7602124.0
+    }
+   ]
+  },
+  {
+   "label": "玉兰路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "襄阳轴承",
+     "three": true,
+     "net": -74881678.1
+    },
+    {
+     "name": "正裕工业",
+     "three": false,
+     "net": -23055774.0
+    },
+    {
+     "name": "弘景光电",
+     "three": true,
+     "net": -9045136.35
+    }
+   ]
+  },
+  {
+   "label": "联储宁波分",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "N莱特转",
+     "three": false,
+     "net": 4188470.0
+    }
+   ]
+  },
+  {
+   "label": "宁波桑田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "申达股份",
+     "three": false,
+     "net": 20954790.76
+    },
+    {
+     "name": "星光股份",
+     "three": true,
+     "net": 17249811.0
+    }
+   ]
+  },
+  {
+   "label": "宁波解放南",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "赛福天",
+     "three": true,
+     "net": 19830501.0
+    }
+   ]
+  },
+  {
+   "label": "益田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "茂业商业",
+     "three": false,
+     "net": 4245606.0
+    },
+    {
+     "name": "大鹏工业",
+     "three": false,
+     "net": 1916649.87
+    }
+   ]
+  },
+  {
+   "label": "彩田路",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "百洋股份",
+     "three": false,
+     "net": -33343448.67
+    }
+   ]
+  },
+  {
+   "label": "大小说家",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "世纪恒通",
+     "three": false,
+     "net": -24298131.0
+    }
+   ]
+  },
+  {
+   "label": "低位挖掘",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "凡拓数创",
+     "three": false,
+     "net": 5596595.58
+    },
+    {
+     "name": "慈文传媒",
+     "three": false,
+     "net": -15692240.0
+    },
+    {
+     "name": "赛福天",
+     "three": true,
+     "net": -10915401.1
+    },
+    {
+     "name": "奇精机械",
+     "three": false,
+     "net": -1351769.0
+    }
+   ]
+  },
+  {
+   "label": "成都系",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "宏明电子",
+     "three": false,
+     "net": 58518347.2
+    },
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": -39364468.0
+    },
+    {
+     "name": "慈星股份",
+     "three": true,
+     "net": -4119470.0
+    }
+   ]
+  },
+  {
+   "label": "基金董事长",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "大业股份",
+     "three": false,
+     "net": -20817902.8
+    }
+   ]
+  },
+  {
+   "label": "葛卫东",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "华正新材",
+     "three": false,
+     "net": 163373024.0
+    },
+    {
+     "name": "金健米业",
+     "three": false,
+     "net": 21727780.64
+    },
+    {
+     "name": "星光股份",
+     "three": true,
+     "net": -48139949.0
+    },
+    {
+     "name": "海洋王",
+     "three": false,
+     "net": -31320720.0
+    }
+   ]
+  },
+  {
+   "label": "南京帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "世纪恒通",
+     "three": false,
+     "net": 31743639.72
+    },
+    {
+     "name": "赛福天",
+     "three": true,
+     "net": -13884553.0
+    }
+   ]
+  },
+  {
+   "label": "温州帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "胜通能源",
+     "three": true,
+     "net": 22758535.0
+    },
+    {
+     "name": "国脉科技",
+     "three": true,
+     "net": 21866572.0
+    },
+    {
+     "name": "晶华新材",
+     "three": false,
+     "net": -26141210.15
+    },
+    {
+     "name": "新华百货",
+     "three": true,
+     "net": -24916663.4
+    }
+   ]
+  },
+  {
+   "label": "深圳帮",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": -28544506.0
+    }
+   ]
+  },
+  {
+   "label": "开源西安西",
+   "kind": "seat",
+   "items": [
+    {
+     "name": "秦安股份",
+     "three": false,
+     "net": 40510042.0
+    },
+    {
+     "name": "天邑股份",
+     "three": false,
+     "net": 40405679.96
+    },
+    {
+     "name": "申达股份",
+     "three": false,
+     "net": 32190437.0
+    },
+    {
+     "name": "国脉科技",
+     "three": true,
+     "net": 16806265.659999996
+    },
+    {
+     "name": "沪光股份",
+     "three": true,
+     "net": 9521279.0
+    },
+    {
+     "name": "晶华新材",
+     "three": false,
+     "net": -26828883.0
+    },
+    {
+     "name": "林州重机",
+     "three": false,
+     "net": -23221316.4
+    },
+    {
+     "name": "正裕工业",
+     "three": false,
+     "net": -17344501.35
+    },
+    {
+     "name": "奇精机械",
+     "three": false,
+     "net": -7794640.0
+    },
+    {
+     "name": "青岛食品",
+     "three": true,
+     "net": -2855570.5599999987
+    },
+    {
+     "name": "新华百货",
+     "three": true,
+     "net": -2432802.8000000045
+    },
+    {
+     "name": "兰生股份",
+     "three": true,
+     "net": -1930407.5999999978
+    }
+   ]
+  },
+  {
+   "label": "拉萨天团",
+   "kind": "names",
+   "items": [
+    {
+     "name": "新华百货",
+     "three": true,
+     "net": 25591803.0
+    },
+    {
+     "name": "国脉科技",
+     "three": true,
+     "net": 20081200.07
+    },
+    {
+     "name": "睿能科技",
+     "three": false,
+     "net": 12198986.0
+    },
+    {
+     "name": "冰山冷热",
+     "three": false,
+     "net": 10472919.079999998
+    },
+    {
+     "name": "襄阳轴承",
+     "three": true,
+     "net": 8166892.140000001
+    },
+    {
+     "name": "紫光国微",
+     "three": false,
+     "net": 7909926.640000001
+    },
+    {
+     "name": "华瓷股份",
+     "three": false,
+     "net": 6960722.0
+    },
+    {
+     "name": "百洋股份",
+     "three": false,
+     "net": 4307195.0
+    },
+    {
+     "name": "宇特光电",
+     "three": false,
+     "net": 3463450.7600000002
+    },
+    {
+     "name": "百瑞吉",
+     "three": false,
+     "net": 2593522.46
+    },
+    {
+     "name": "皇台酒业",
+     "three": true,
+     "net": 2438077.0
+    },
+    {
+     "name": "林州重机",
+     "three": false,
+     "net": 2394289.4
+    },
+    {
+     "name": "凡拓数创",
+     "three": false,
+     "net": 1420143.669999998
+    },
+    {
+     "name": "三峡新材",
+     "three": false,
+     "net": 1250192.1199999992
+    },
+    {
+     "name": "金健米业",
+     "three": false,
+     "net": -40690405.05
+    },
+    {
+     "name": "海正生材",
+     "three": false,
+     "net": -21548301.31
+    },
+    {
+     "name": "大洋电机",
+     "three": false,
+     "net": -17428698.72
+    },
+    {
+     "name": "时代万恒",
+     "three": false,
+     "net": -7449865.0
+    },
+    {
+     "name": "宏明电子",
+     "three": false,
+     "net": -5388454.42
+    },
+    {
+     "name": "远大健科",
+     "three": false,
+     "net": -4494102.27
+    },
+    {
+     "name": "阳光乳业",
+     "three": true,
+     "net": -3534877.6099999994
+    },
+    {
+     "name": "慈文传媒",
+     "three": false,
+     "net": -2547351.0
+    },
+    {
+     "name": "南方乳业",
+     "three": false,
+     "net": -1035150.5499999998
+    }
+   ]
+  }
+ ]
+}
