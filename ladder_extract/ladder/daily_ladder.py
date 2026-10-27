@@ -453,7 +453,8 @@ REASON_RULES += [
     (("家用电器", "家电零部件", "小米概念", "智能家居", "厨电"), "消费电子"),
     (("MLCC", "电容", "电阻", "电感", "晶圆", "封装测试", "分立器件",
       "碳化硅", "氮化镓", "存储芯片", "光刻", "被动元件"), "半导体"),
-    (("空冷", "液冷", "数据中心", "服务器", "光通信", "IDC", "算力租赁"), "算力"),
+    (("空冷", "液冷", "数据中心", "服务器", "光通信", "IDC", "算力租赁",
+      "MPO", "跳线", "光模块", "光纤"), "算力"),
     (("数据库", "数据确权", "数据资产"), "数据要素"),
     (("减速器", "丝杠", "谐波", "空心杯", "精密传动"), "机器人概念"),
     (("医美", "医疗美容", "抗癌", "质谱", "病理", "诊断", "中药", "疫苗"), "医药"),
@@ -465,12 +466,18 @@ REASON_RULES += [
     (("海外工程", "基建盘活", "基础建设", "房屋建设", "工程建设", "水利"), "基建"),
     (("燃气", "天然气", "油气", "水务", "环保", "公用事业"), "公用事业"),
     (("AI安全",), "AI应用"),
+]
+
+# 东财行业名 → 板块：仅用于「无题材可归」时的兜底展示（canon_label），
+# 不参与兜底打分，避免行业大类压过当日真实热点概念
+IND_BOARD_RULES = [
     # ---- 东财行业名兜底：行业名同样收敛到板块，避免画面出现「元件」「专用设备」这类裸行业 ----
     (("元件", "被动元件", "光学光电子", "电子化学品"), "半导体"),
     (("通用设备", "专用设备", "自动化设备", "仪器仪表", "工程机械"), "智能制造"),
     (("家居用品", "文娱用品", "个护用品", "包装印刷", "造纸", "塑料", "橡胶"), "消费"),
     (("厨卫电器", "照明设备", "家电零部", "白色家电", "黑色家电"), "消费电子"),
-    (("软件开发", "IT服务", "互联网服务", "计算机设备"), "人工智能"),
+    (("软件开发", "IT服务", "互联网服务"), "AI应用"),
+    (("计算机设备", "通信设备"), "AI硬件"),
     (("小金属", "贵金属", "工业金属", "金属新材料"), "有色金属"),
     (("电池", "电源设备"), "新能源车"),
     (("铁路公路", "航空机场", "航运港口", "快递"), "物流航运"),
@@ -495,6 +502,14 @@ def map_theme(name):
     """把一个标签/概念名映射到规范板块名；无匹配返回 None"""
     i = rule_hit(name)
     return REASON_RULES[i][1] if i is not None else None
+
+
+def ind_board(name):
+    """东财行业名 → 板块（仅兜底展示用）；无匹配返回 None"""
+    for keys, out in IND_BOARD_RULES:
+        if any(k in name for k in keys):
+            return out
+    return None
 
 
 def pick_theme(tags):
@@ -524,7 +539,7 @@ def canon_label(theme, industry=""):
         return hit
     ind = str(industry or "").strip()
     if ind:
-        return map_theme(ind) or ind
+        return map_theme(ind) or ind_board(ind) or ind
     return t or "其他"
 
 
@@ -559,6 +574,27 @@ def load_theme_override():
     except Exception as e:
         print(f"  覆盖表 theme_override.json 读取失败：{e}")
         return {}
+
+
+def load_prev_themes(date):
+    """上一交易日缓存里各股的题材：断板股沿用昨日题材，避免标签天天漂移"""
+    try:
+        files = sorted(f for f in os.listdir(DATA_DIR)
+                       if re.fullmatch(r"\d{8}(_午盘)?\.json", f) and f[:8] < date)
+    except FileNotFoundError:
+        return {}
+    for f in reversed(files):
+        try:
+            d = json.load(open(os.path.join(DATA_DIR, f), encoding="utf-8"))
+        except Exception:
+            continue
+        out = {}
+        for s in d.get("stocks", []) + [x for v in (d.get("failed") or {}).values() for x in v]:
+            if s.get("theme"):
+                out[s["code"]] = s["theme"]
+        if out:
+            return out
+    return {}
 
 
 def attach_themes(data):
@@ -626,7 +662,16 @@ def attach_themes(data):
         except Exception as e:
             print(f"  东财概念兜底失败：{e}")
 
-    # 3) 统一口径：把细分标签/行业名收敛到规范板块名，保证每天标签一致
+    # 3) 断板股（今日不在涨停池）沿用昨日题材：这类个股当天多为主线退潮，
+    #    用东财概念重算容易把题材换掉，沿用昨日既准确又保证跨天口径稳定
+    prev = load_prev_themes(data["date"])
+    for s in failed:
+        if s["code"] not in override and s["code"] not in reasons:
+            pt = prev.get(s["code"])
+            if pt:
+                s["theme"] = pt
+
+    # 4) 统一口径：把细分标签/行业名收敛到规范板块名，保证每天标签一致
     for s in alls:
         s["theme"] = canon_label(s.get("theme"), s.get("industry"))
 
